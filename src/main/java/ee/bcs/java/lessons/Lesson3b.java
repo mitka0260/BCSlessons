@@ -1,4 +1,4 @@
-package ee.bcs.java.demo.tasks;
+package ee.bcs.java.lessons;
 
 import java.util.Arrays;
 import java.util.Map;

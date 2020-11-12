@@ -1,4 +1,4 @@
-package ee.bcs.java.demo.tasks;
+package ee.bcs.java.lessons;
 
 public class Ruut {
     int x;
