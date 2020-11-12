@@ -1,0 +1,130 @@
+package ee.bcs.java.learning;
+
+public class JSONlearning {
+/*
+
+    {
+        "помещение":{
+        "название":"избушка",
+                "разумна":true
+    },
+        "основание":{
+        "тип":"курьи ноги",
+                "количество":2
+    },
+        "проживающие":[
+        {
+            "имя":"Баба Яга",
+                "профиль":"ведьма"
+        }
+   ],
+        "местоположение":{
+        "адрес":"граница леса"
+    }
+    }
+///////////////////////////////////////////////
+    {
+        "name":"oleg",
+            "last":"eremenko"
+    }
+///////////////////////////////////////////////
+    {
+        "name":"batman",
+            "enemies": [1, 4, 6, 7, 8, 4, 3, 90]
+    }
+
+    ///////////////////////////////////////////////
+
+    {
+        "name":"grandpa",
+            "children": [
+        {
+            "name" = "Bob",
+                    "children": ["Emma", "Nikol"]
+        },
+        {
+            "name" = "David",
+                    "children": ["Jesica", "Pamela"]
+        }
+]
+    }
+///////////////////////////////////////////////////////
+    {
+        "firstName": "Иван",
+            "lastName": "Иванов",
+            "address": {
+        "streetAddress": "Московское ш., 101, кв.101",
+                "city": "Ленинград",
+                "postalCode": 101101
+    },
+        "phoneNumbers": [
+        "812 123-1234",
+                "916 123-4567"
+   ]
+    }
+/////////////////////////////////////////////////
+
+    {
+        "bookList": [
+        {
+            "name": "Lord of the Rings",
+                "author": "J. R. R. Tolkien"
+        },
+        {
+            "name": "a",
+                "author": "b"
+        }
+	]
+    }
+//////////////////////////////////////////////
+    //BCS lesson:
+
+    {
+        "clientList": [{
+        "name": "John",
+                "age": "30",
+                "address": "White House",
+                "cars": [{
+            "number": "123ABC",
+                    "brand": "Toyota"
+        },
+        {
+            "number": "456CDE",
+                "brand": "Lexus"
+        }
+			]
+    },
+        {
+            "name": "Donald",
+                "age": "70",
+                "address": "Black House",
+                "cars": [{
+            "number": "987ZXY",
+                    "brand": "Hyundai"
+        },
+            {
+                "number": "789RDC",
+                    "brand": "Fiat"
+            }
+			]
+        },
+        {
+            "name": "Robert",
+                "age": "40",
+                "address": "Green House",
+                "cars": [{
+            "number": "762AJT",
+                    "brand": "Maybach"
+        },
+            {
+                "number": "274AIE",
+                    "brand": "Volvo"
+            }
+			]
+        }
+	]
+    }
+
+
+ */
+}

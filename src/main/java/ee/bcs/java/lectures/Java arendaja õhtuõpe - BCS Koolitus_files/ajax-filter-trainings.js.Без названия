@@ -1,0 +1,147 @@
+(function ($) {
+
+    var cat_filter = $('.cat-filter');
+
+    $(cat_filter).click(function () {
+        var value = $(this).attr('title');
+
+        $('#last-val').val(value);
+
+        if (cat_filter.hasClass('active')) {
+            cat_filter.removeClass('active');
+            $(this).addClass('active');
+        }
+    });
+
+    $(document).ready( function($) {
+
+        var cat_parent_id = $('.bcs-training-cat-menu .current-menu-item a').attr('id');
+
+        function sendData(orderDate, slug, orderLang, subTermParentID, subTermID){
+            $.ajax({
+                url: ajaxtrainingsfilter.ajaxurl,
+                type: 'post',
+                data: {
+                    action: 'trainingfilter',
+                    cat_slug: slug,
+                    sub_term_parent_id: subTermParentID,
+                    sub_term_id: subTermID,
+                    cat_parent_id: cat_parent_id,
+                    order_date: orderDate,
+                    order_lang: orderLang
+                },
+                error: function () {
+                    $('#response').html('An error occured');
+                },
+                beforeSend: function() {
+                    //$('#response').html('Searching requested category...');
+                    // $('#main').find( 'article' ).remove();
+                    // $('#main nav').remove();
+                    // $(document).scrollTop();
+                    // $('#main').append( '<div class="page-content" id="loader">Loading New Posts...</div>' );
+                },
+                success: function( data) {
+                    $('#response').html(data);
+                    // $('#main #loader').remove();
+                    // $('#main').append( html );
+                }
+            });
+        }
+
+        function sendSubData(subTermParentID){
+            $.ajax({
+                url: ajaxtrainingsfilter.ajaxurl,
+                type: 'post',
+                data: {
+                    action: 'trainingfiltersub',
+                    sub_term_parent_id: subTermParentID
+                },
+                error: function () {
+                    $('#response').html('An error occured');
+                },
+                beforeSend: function() {
+                    //$('#response').html('Searching requested category...');
+                    // $('#main').find( 'article' ).remove();
+                    // $('#main nav').remove();
+                    // $(document).scrollTop();
+                    // $('#main').append( '<div class="page-content" id="loader">Loading New Posts...</div>' );
+                },
+                success: function( data) {
+                    $('#subterm-response').html(data);
+                    // $('#main #loader').remove();
+                    // $('#main').append( html );
+                }
+            });
+        }
+
+        var selectedDate;
+        var orderLang;
+        var catSlug;
+        var subTermParentID;
+        var subTermID;
+
+        var filterSelector = $('.date-filter, .training-second-menu li a, .lang-filter');
+
+        filterSelector.on('change click', function () {
+            var thisValue = $('.date-filter option:selected').val();
+            if(thisValue === 'ASC' || thisValue === 'DESC'){
+                selectedDate = thisValue;
+            } else {
+                selectedDate = 'ASC';
+            }
+            catSlug = $('#last-val').val();
+
+            orderLang = $('.lang-filter option:selected').val();
+        });
+
+        $('.training-second-menu li a').on('click', function () {
+            if($(this).attr('value') !== 'undefined'){
+                subTermParentID = $(this).attr('value');
+            }
+        });
+
+        // vs - possible this event not working, I created another event bellow
+        $('.subterm-select').on('change', 'select', function () {
+            subTermID = $(this).val();
+            sendData(selectedDate, catSlug, orderLang, subTermParentID, subTermID);
+        });
+
+        $(document).on("click", ".training-third-menu li a", function(e){
+            e.preventDefault();
+            var subTermID = $(this).attr('id');
+
+            if (subTermID) {
+                $('.training-third-menu-all').removeClass('active');
+                sendData(selectedDate, catSlug, orderLang, subTermParentID, subTermID);
+            } else {
+                sendData(selectedDate, catSlug, orderLang, subTermParentID);
+            }
+
+            var url = $(this).attr('href');
+
+            if (url) {
+                window.history.pushState(1, 1, url);
+            }
+        });
+
+        $('.date-filter, .lang-filter, .subterm-select select').on({
+            change: function (e) {
+                sendData(selectedDate, catSlug, orderLang, subTermParentID, subTermID);
+            }
+        });
+
+        $('.training-second-menu li a').on({
+            click: function(e){
+                e.preventDefault();
+                sendData(selectedDate, catSlug, orderLang, subTermParentID);
+                sendSubData(subTermParentID);
+
+                var url = $(this).attr('href');
+
+                if (url) {
+                    window.history.pushState(1, 1, url);
+                }
+            }
+        });
+    });
+})(jQuery);
