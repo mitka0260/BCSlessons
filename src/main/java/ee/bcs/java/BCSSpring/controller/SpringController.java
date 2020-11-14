@@ -16,13 +16,13 @@ public class SpringController {
 
     //аннотация, работает сервер спринга, запускает мой код, ищет весь мой код
     //контроллер - это важный для нас класс, и это спринг знает
-    @GetMapping(value = "/")
+    @GetMapping(value = "zopa")
     public String helloSpring() {
         return "Hello, Spring!";
     }
 
     //НЕ РАБОТАЕТ
-    @GetMapping("")
+    @GetMapping("/")
     public String helloStringPage(
             @RequestParam("name") String name) {
         return "Hello, " + name;

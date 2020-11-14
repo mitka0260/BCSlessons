@@ -11,7 +11,7 @@ Comparator возвращает int по следующей схеме:
 
  */
 
-package ee.bcs.java.demo.tasks;
+package ee.bcs.java.learning;
 
 import java.util.ArrayList;
 import java.util.Collections;

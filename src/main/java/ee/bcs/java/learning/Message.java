@@ -1,4 +1,4 @@
-package ee.bcs.java.lessons;
+package ee.bcs.java.learning;
 
 import java.util.Random;
 

@@ -42,7 +42,7 @@ public class Lesson3b {
         int[] e = {7, 4, 67, 2, 1, 5, 65, 3, 34, 45, 54, 69};
         System.out.println();
 
-        long isPrimeNr = 19;
+        long isPrimeNr = 18;
         System.out.println("Number " + isPrimeNr + " is prime - " + isPrime(isPrimeNr));
         nrFactors(isPrimeNr);
     }
