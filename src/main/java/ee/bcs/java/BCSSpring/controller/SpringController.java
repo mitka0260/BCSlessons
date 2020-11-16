@@ -16,17 +16,21 @@ public class SpringController {
 
     //аннотация, работает сервер спринга, запускает мой код, ищет весь мой код
     //контроллер - это важный для нас класс, и это спринг знает
-    @GetMapping(value = "zopa")
+    @GetMapping(value = "")
     public String helloSpring() {
         return "Hello, Spring!";
     }
 
-    //НЕ РАБОТАЕТ
-    @GetMapping("/")
-    public String helloStringPage(
+    /*
+    @GetMapping("")
+    public String helloSpringPage(
             @RequestParam("name") String name) {
-        return "Hello, " + name;
+        if (name=="")
+            return "Hello, Spring";
+        else
+            return "Hello, " + name;
     }
+     */
 
     @GetMapping("math/abs/{n}")
     public String absValuePath(
@@ -168,7 +172,9 @@ public class SpringController {
         return a;
     }
     //выведет в формате json
-    //{"status":"OK","message":"Sõnum"}
+    //{"status":"OK","message":"I like Metallica"}
+
+
 
     List<Employee> employeeList = new ArrayList<>();
 
@@ -267,6 +273,26 @@ public class SpringController {
         employeeList.set(0, newEmployee);
     }
     //http://localhost:8080/Employee/update?id=0&name=Alice
+
+    @GetMapping("Employee/updateName")
+    public void updateName(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name) {
+        for (Employee employee : employeeList) {
+            if (employee.getId() == id)
+                employee.setName(name);
+        }
+    }
+
+    @GetMapping("Employee/updateID")
+    public void updateID(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name) {
+        for (Employee employee: employeeList) {
+            if (employee.getName().equals(name))
+                employee.setId(id);
+        }
+    }
 
     @GetMapping("Employee/delete")
     public void deleteEmployee(

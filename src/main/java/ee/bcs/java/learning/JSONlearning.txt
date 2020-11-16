@@ -1,7 +1,6 @@
 package ee.bcs.java.learning;
 
 public class JSONlearning {
-/*
 
     {
         "помещение":{
@@ -126,5 +125,4 @@ public class JSONlearning {
     }
 
 
- */
 }

@@ -1,15 +1,25 @@
 package ee.bcs.java.lessons;
 
+import ee.bcs.java.BCSSpring.controller.Employee;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.*;
 
 public class Lesson4 {
+
+    /* TODO all olev on näidis, loo uus klass selle ülesande jaoks
+     * Loo uus klass ruut
+     * ruudu konstruktor peab vastu võtma x ja y kordinaadi ning külje pikkuse.
+     * objektil peab olema meetod pindala, mis tagastab ruudu pindala
+     */
 
     public static void main(String[] args) {
         yl1();
         yl2();
         Ruut ruut = new Ruut(100, 100, 15);
         System.out.println("Ruudu pindala = " + ruut.pindala());
+        System.out.println();
     }
 
     // TODO arvuta kasutades BigDecimali 1.89 * ((394486820345 / 15 ) + 4 )
@@ -36,13 +46,6 @@ public class Lesson4 {
         BigDecimal b1 = new BigDecimal(11);
         BigDecimal c1 = a1.multiply(b1);
         System.out.println(c1);
-
     }
-
-    /* TODO all olev on näidis, loo uus klass selle ülesande jaoks
-     * Loo uus klass ruut
-     * ruudu konstruktor peab vastu võtma x ja y kordinaadi ning külje pikkuse.
-     * objektil peab olema meetod pindala, mis tagastab ruudu pindala
-     */
 
 }
