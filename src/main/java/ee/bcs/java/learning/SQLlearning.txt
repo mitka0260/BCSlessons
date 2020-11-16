@@ -1,0 +1,14 @@
+INSERT INTO bank_accounts (iban, balance)
+VALUES ('EE128', '10');
+
+SELECT * FROM bank_accounts;
+SELECT iban FROM bank_accounts;
+SELECT * FROM bank_accounts WHERE balance='10';
+
+UPDATE bank_accounts SET balance='10' WHERE balance=11;
+
+DELETE FROM bank_accounts WHERE balance=10;
+
+
+
+SELECT * FROM bank_accounts

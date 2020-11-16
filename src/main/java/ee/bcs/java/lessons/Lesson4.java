@@ -42,7 +42,10 @@ public class Lesson4 {
         float a = 1.89f;
         a = a * 11;
         System.out.println(a);
-        BigDecimal a1 = new BigDecimal(1.89);
+        BigDecimal a1 = new BigDecimal("1.89");
+        System.out.println(a1);
+        BigDecimal a2 = new BigDecimal(1.89);
+        System.out.println(a2);
         BigDecimal b1 = new BigDecimal(11);
         BigDecimal c1 = a1.multiply(b1);
         System.out.println(c1);
