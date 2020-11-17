@@ -4,7 +4,6 @@ import ee.bcs.java.BCSSpring.controller.Employee;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
 
 public class Lesson4 {
 
@@ -18,7 +17,7 @@ public class Lesson4 {
         yl1();
         yl2();
         Ruut ruut = new Ruut(100, 100, 15);
-        System.out.println("Ruudu pindala = " + ruut.pindala());
+        System.out.println("Ruudu pindala = " + ruut.pindala());    //225
         System.out.println();
     }
 
@@ -29,9 +28,8 @@ public class Lesson4 {
         BigDecimal c = new BigDecimal("15");
         BigDecimal d = new BigDecimal("4");
 
-        BigDecimal e = b.divide(c, 6, RoundingMode.HALF_UP);
-        BigDecimal f = a.multiply(e.add(d));
-        System.out.println(f);
+        System.out.println(a.multiply((b.divide(c, 6, RoundingMode.HALF_UP).add(d))));
+        //49705339371.02999937
     }
 
     public static void yl2() {
@@ -40,15 +38,12 @@ public class Lesson4 {
         // TODO trüki tulemus välja
         // TODO nüüd tee seda kasutades klassi BigDecimal ja võrdle tulemust
         float a = 1.89f;
-        a = a * 11;
-        System.out.println(a);
-        BigDecimal a1 = new BigDecimal("1.89");
-        System.out.println(a1);
-        BigDecimal a2 = new BigDecimal(1.89);
-        System.out.println(a2);
-        BigDecimal b1 = new BigDecimal(11);
-        BigDecimal c1 = a1.multiply(b1);
-        System.out.println(c1);
+        System.out.println(a*11);  //20.789999
+
+        System.out.println(new BigDecimal("1.89")); //1.89
+        System.out.println(new BigDecimal(1.89)); //1.8899999999999999023003738329862244427204132080078125
+
+        System.out.println(new BigDecimal("1.89").multiply(new BigDecimal("11")));    //20.79
     }
 
 }
