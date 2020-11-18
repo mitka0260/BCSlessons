@@ -1,5 +1,219 @@
-INSERT INTO bank_accounts (iban, balance)
-VALUES ('EE128', '10');
+SQL - реляционная база данных — база данных, основанная на реляционной модели данных.
+Понятие «реляционный» основано на англ. relation («отношение, зависимость, связь»).
+
+SQL - язык общения медлу программой (сайт/...) и базой данных.
+
+Нормализация таблиц: елисн доа что-то изменить, то изменить надо только в одном месте. Делается это за счёт разделения на более мелкие таблицы + создаются ссылки между таблицами
+Нормальная форма нр1:  все строки различные и все атрибуты простые (ни одно из полей нельзя разделить на более простые).
+Например, чтобы в ячейке не было бы СПИСКА фамилий поставщиков, если добавится поставщик, то придётся добавлять ещё одну колонку - НЕПРАВИЛЬНО
+
+Нормальная форма нр2: каждое неключевое поле должно зависеть от первичного ключа
+
+Нормальная форма нр3: все неключевые поля независимы друг от друга
+-------------------------------------
+создаём базу shop, в ней таблица people
+
+CREATE DATABASE learningSQLbase;
+DROP DATABASE learningSQLbase; //удалить базу данных learningSQLbase
+
+чтобы создать таблицу внутри базы данных, надо войти в базу данных и дальше:
+CREATE TABLE users(id INT);
+DROP TABLE users; //удалить
+CREATE TABLE people(
+            id INT NOT NULL AUTO_INCREMENT,     //не может быть пустым, автоматически увеличивается на 1 при добавлении нового элемента
+            name VARCHAR(30),                   //макс длина строки 30 символов типа varchar (это строка макс 255 символов)
+            bio TEXT,                           //биография, внутри TEXT = это до 65000 символов
+            birth DATE,
+            email VARCHAR,
+            PRIMARY KEY(id)                    //=уникальное поле, не повторяется
+                    );
+ALTER TABLE people ADD pass VARCHAR(32);    //в подтаблице (главная - shop) добавить поле pass
+ALTER TABLE people DROP COLUMN pass;        //удалить pass из таблицы
+-------------------------------------
+INSERT INTO people (name, bio, birth, email) VALUES ('Алексей', 'просто прграммист', '2050-04-04', 'test@mail.ru')    //id не пишем, т.к она автоматически инкременируется = +1,порядок не важен
+SELECT * FROM people;
+INSERT INTO people (name, email) VALUES ('Пётр', 'example@gmail.com')   //не указанные значения будут null
+
+чтобы запретить к-л полю быть NULL:
+ALTER TABLE people CHANGE birth birth DATE NOT NULL; //birth не меняется, дата тоже, но теперь NOT NULL
+
+INSERT INTO people (name, email, bio, birth)
+                VALUES
+                   ('Bob', 'test@test.com', 'Coding', '2050-03-05'),
+                   ('Alex', 'test2@test.com', 'Coding1', '2050-03-05'),
+                   ('John', 'test3@test.com', 'Coding2', '2050-03-05');
+
+UPDATE people SET name = 'Max' WHERE id=5;
+UPDATE people SET name = 'Ivan', email='ivan@mail.ru' WHERE name='Max';
+UPDATE people SET name = 'Ivan', email='ivan@mail.ru' WHERE id > 4;
+UPDATE people SET bio = 'New biotext' WHERE name='Ivan' AND id = 5;
+----------------------------------------
+учимся удалять данные:
+
+CREATE TABLE test (
+        id INT NOT NULL,
+        someText TEXT,
+        someField VARCHAR(36),
+        PRIMARY KEY(id)
+                    );
+теперь надо зайти в эту таблицу и дальше:
+INSERT INTO test (id, someText, someField)
+            VALUES
+                (1, "Просто текст 1", "Текст"),
+                (2, "Просто текст 2", "Текст"),
+                (3, "Просто текст 3", "Текст"),
+                (4, "Просто текст 4", "Текст");
+
+DELETE FROM test;   //удалить всё
+DELETE FROM test WHERE id>2;  //id=2
+
+TRUNCATE test;  //полностью очистить
+DROP TABLE test; //удалить таблицу
+
+------------------------------------
+выборка данных
+SELECT * FROM people;    //выбрать все записи в таблице
+SELECT name FROM people;
+SELECT name, bio FROM people;
+SELECT id, name FROM people WHERE id >= 2  AND id < 4;\
+SELECT * FROM people WHERE id <> 5; //не равно
+SELECT * FROM people WHERE id <> 5 AND id <> 2 AND name='Ivan' AND bio IS NULL; //или IS NOT NULL
+SELECT * FROM people WHERE name = 'Ivan' OR id = 4;
+
+SELECT DISTINCT name FROM people;   //в результате НЕ БУДЕТ повторов
+SELECT * FROM people LIMIT 2;       //покажет только 2 записи
+SELECT * FROM people LIMIT 2, 3;    //2 пропустит, выведет следующие 3 после двух
+
+SELECT * FROM people ORDER BY birth;    //выборка + сортировка
+SELECT * FROM people ORDER BY id DESC;  //сортировка будет в порядке убывания
+
+SELECT * FROM people WHERE id > 2 AND id < 6; //или:
+SELECT * FROM people WHERE id BETWEEN 2 AND 6 AND id <> 4 ORDER BY id DESC LIMIT 10;
+SELECT * FROM people WHERE id IN(4, 5, 2, 1) ORDER BY id DESC LIMIT 10;
+SELECT * FROM people WHERE name LIKE 'Ив%'   //выбрать все записи, где поле name начинается с "Ив";
+                                             //можно записать и как '%a%' - ищем поле, где есть буква а
+
+SELECT * FROM people WHERE ORDER BY LIMIT;  //ПОРЯДОК ОПЕРАТОРОВ!!!
+
+---------------------------------
+Создание индексов и работа с ними:
+Индексы - доп характеристики для полей, по ним можно осуществлять поиск (будет быстрее), их надо добавлять к нужным полям
+не по всем полям нужно реализовывать поиск по сайту, например (только по названию и статьям, но не по дате публикации).
+НЕ ВИДНЫ пользователю, только ускоряют поиск информации.
+
+CREATE INDEX NIndex ON people(name);    //ничего не поменялось, только в структуре базы будет ключик
+SELECT name FROM people;        //этот поиск будет быстрее если у этого поля есть индекс
+DROP INDEX NIndex ON people;    //удалили индекс
+
+-------------------------------------
+Объединение данных:
+Методы объединения:
+INNER JOIN - берёт общие данные двух таблиц
+LEFT JOIN
+RIGHT JOIN
+OUTER JOIN - может взять ВСЕ данные
+
+
+создадим ещё две таблицы:
+
+CREATE TABLE shop(
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(100),
+    price INT,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE orders(
+    id INT NOT NULL AUTO_INCREMENT,
+    orderNumber INT,
+    shopID INT,          //ссылка на ID товара
+    personId int,
+    date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(id)
+    FOREIGN KEY(shopID) REFERENCES shop(id),        //указали, что shopID = ссылка на ID в другой таблице
+    FOREIGN KEY(personID) REFERENCES people(id)
+);
+
+У нас есть база learningSQLbase
+в ней 3 таблицы - people, shop, orders
+
+Наполним таблицы:
+INSERT
+    INTO shop (title, price)
+            VALUES  ('iPhone', 300),
+                    ('TV', 320),
+                    ('PS4', 30),
+                    ('Mac', 15),
+                    ('Fridge', 23),
+                    ('iPhone 7', 10);
+INSERT
+    INTO orders (orderNumber, shopId, personId)
+        VALUES  (0001, 2, 4),         //первый заказ: BOB купил TV
+                (0002, 4, 1),
+                (0003, 2, 5),
+                (0004, 3, 3),
+                (0005, 1, 2),
+                (0006, 1, 4);
+
+Теперь объеденим данные - чтобы вывести все заказы конкретного пользователя:
+SELECT orders.orderNumber, people.name, people.email            //все данные не нужны, только эти
+       FROM people                                              //откуда беру данные
+            INNER JOIN orders ON people.Id = orders.personId    //проверяет данные из таблички people с табличкой orders, если данные будут совпадать, они будут выведены
+                ORDER BY orders.orderNumber DESC;               //сортировка
+Получили таблицу: номер заказа - имя - email
+
+SELECT shop.title, people.name, people.email
+    FROM people
+        INNER JOIN orders ON peopleid = orders.personId
+        INNER JOIN shop ON shop.id = orders.shopId
+            ORDER BY orders.orderNumber DESC;
+Получили таблицу: наименование товара - имя заказчика - мейл заказчика  //title - name - email
+
+SELECT people.name, orders.orderNumber
+    FROM people
+        LEFT JOIN orders ON people.id = orders.personId
+            ORDER BY people.name DESC;
+
+SELECT orders.date_time, people.name
+    FROM orders
+        RIGHT JOIN people ON orders.personId = people.id;   //данные берутся из правой таблицы, т.е НЕ из orders
+Получили: время - имя
+-------------------------------------
+Псевдонимы - нужны для выборки данных
+Псевдонимы - альтернативные названия для полей и табличек
+Удобны при объединении полей в единое целое
+
+SELECT name AS 'Имя', birth AS 'День Рождения'
+    FROM people
+Заголовки столбцов изменились
+
+SELECT CONCAT('Имя: ', name, '. День Рождения: ', birth) AS 'Информация'
+    FROM people;
+Поле/колонка называется "Информация", каждая ячейка: Имя: Лёха. День Рождения: 2020-05-04
+
+SELECT p.id, p.name, s.title, s.price
+    FROM people AS p, shop AS s
+Получили таблицу id - name - title - price (из двух таблицы)
+здесь НЕТ ОБЪЕДИНЕНИЯ данных, это ВЫБОРКА из двух таблиц
+
+
+Функции в SQL:
+посчитаем, сколько элементов в таблице shop:
+SELECT COUNT(id) FROM shop;        //сколько есть полей id в таблице shop
+
+SELECT MIN(price) FROM shop;
+SELECT MAX(price) FROM shop;
+SELECT AVG(price) FROM shop;
+SELECT SUM(price) FROM shop;
+SELECT UCASE(title) FROM shop;  //всё в верхний регистр = большими буквами
+SELECT LCASE(title) FROM shop;
+
+SELECT price, COUNT(price) AS 'Количество' FROM shop GROUP BY price;    //сгруппировать по полю price
+SELECT price, COUNT(price) AS 'Количество' FROM shop GROUP BY price HAVING COUNT(price) > 1;
+покажет только те, которых больше 1
+
+-------------------------------------
+INSERT INTO bank_accounts (iban, balance) VALUES ('EE128', '10');
 
 SELECT * FROM bank_accounts;
 SELECT iban FROM bank_accounts;
@@ -8,7 +222,3 @@ SELECT * FROM bank_accounts WHERE balance='10';
 UPDATE bank_accounts SET balance='10' WHERE balance=11;
 
 DELETE FROM bank_accounts WHERE balance=10;
-
-
-
-SELECT * FROM bank_accounts

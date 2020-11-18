@@ -4,6 +4,10 @@ import java.util.*;
 
 public class MyList implements List {
 
+    MyList() {
+
+    }
+
     @Override
     public boolean add(Object o) {
         return false;
