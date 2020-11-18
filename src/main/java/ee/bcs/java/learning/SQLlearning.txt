@@ -30,7 +30,7 @@ CREATE TABLE people(
 ALTER TABLE people ADD pass VARCHAR(32);    //в подтаблице (главная - shop) добавить поле pass
 ALTER TABLE people DROP COLUMN pass;        //удалить pass из таблицы
 -------------------------------------
-INSERT INTO people (name, bio, birth, email) VALUES ('Алексей', 'просто прграммист', '2050-04-04', 'test@mail.ru')    //id не пишем, т.к она автоматически инкременируется = +1,порядок не важен
+INSERT INTO people (name, bio, birth, email) VALUES ('Алексей', 'просто программист', '2050-04-04', 'test@mail.ru')    //id не пишем, т.к она автоматически инкременируется = +1,порядок не важен
 SELECT * FROM people;
 INSERT INTO people (name, email) VALUES ('Пётр', 'example@gmail.com')   //не указанные значения будут null
 
