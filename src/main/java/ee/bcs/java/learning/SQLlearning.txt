@@ -1,3 +1,8 @@
+ALTER TABLE employee_role
+ADD FOREIGN KEY(employee_id) REFERENCES employee(id);
+тогда этого не надо:
+INSERT INTO employee_role (employee_id, role_id) VALUES (16, 1)
+
 SQL - реляционная база данных — база данных, основанная на реляционной модели данных.
 Понятие «реляционный» основано на англ. relation («отношение, зависимость, связь»).
 
