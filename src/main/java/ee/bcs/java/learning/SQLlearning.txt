@@ -43,11 +43,11 @@ INSERT INTO people (name, email) VALUES ('Пётр', 'example@gmail.com')   //н
 чтобы запретить к-л полю быть NULL:
 ALTER TABLE people CHANGE birth birth DATE NOT NULL; //birth не меняется, дата тоже, но теперь NOT NULL
 
-INSERT INTO people (name, email, bio, birth)
-                VALUES
-                   ('Bob', 'test@test.com', 'Coding', '2050-03-05'),
-                   ('Alex', 'test2@test.com', 'Coding1', '2050-03-05'),
-                   ('John', 'test3@test.com', 'Coding2', '2050-03-05');
+    INSERT INTO people (name, email, bio, birth)
+                    VALUES
+                       ('Bob', 'test@test.com', 'Coding', '2050-03-05'),
+                       ('Alex', 'test2@test.com', 'Coding1', '2050-03-05'),
+                       ('John', 'test3@test.com', 'Coding2', '2050-03-05');
 
 UPDATE people SET name = 'Max' WHERE id=5;
 UPDATE people SET name = 'Ivan', email='ivan@mail.ru' WHERE name='Max';
@@ -135,7 +135,7 @@ CREATE TABLE orders(
     shopID INT,          //ссылка на ID товара
     personId int,
     date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
     FOREIGN KEY(shopID) REFERENCES shop(id),        //указали, что shopID = ссылка на ID в другой таблице
     FOREIGN KEY(personID) REFERENCES people(id)
 );

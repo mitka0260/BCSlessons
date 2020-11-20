@@ -3,13 +3,15 @@ package ee.bcs.java.BCSSpring.controller;
 import ee.bcs.java.lessons.Lesson1;
 import ee.bcs.java.lessons.Lesson3;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLOutput;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -183,13 +185,11 @@ public class SpringController {
     //{"status":"OK","message":"I like Metallica"}
 
 
-
     List<Employee> employeeList = new ArrayList<>();
     //шлобальная переменная, к ней могут обращаться все методы
 
     @GetMapping("Employees") //returns all employees
-    public List showAllEmployees()
-    {
+    public List showAllEmployees() {
         return employeeList;
     }
     //http://localhost:8080/Employees
@@ -254,7 +254,7 @@ public class SpringController {
     }
     //http://localhost:8080/Employee-indexDB/3
 
-    @GetMapping("employee/getName")
+    @GetMapping("employee/getNameDB")
     public String getEmployee(@RequestParam("id") int idFromRequest) {
         String sql = "SELECT name FROM employee WHERE id = :idSql";
         Map<String, Object> paramMap = new HashMap<>();
@@ -262,10 +262,73 @@ public class SpringController {
         String result = namedParameterJdbcTemplate.queryForObject(sql, paramMap, String.class);
         return result;
 
-        //методы селект и др ничего не возвращают, тога надо так:
+        //методы селект и др ничего не возвращают, тогда надо так:
         //namedParameterJdbcTemplate.update(sql, paramMap);
     }
 //WHERE id =" + idFromRequest; - так писать нельзя в целях безопасности!!!
+
+    @GetMapping("car/regnr")
+    public String getRegNr(@RequestParam("id") Integer id) {
+        String sql = "SELECT regnr FROM car WHERE id=1";
+        Map paramMap = new HashMap();
+        return namedParameterJdbcTemplate.queryForObject(sql, paramMap, String.class);
+    }
+
+    @GetMapping("car/regnr1")
+    public String getRegNr1(@RequestParam("id") Integer i) {
+        String sql = "SELECT regnr FROM car WHERE id=:a";
+        Map paramMap = new HashMap();
+        paramMap.put("a", i);
+        return namedParameterJdbcTemplate.queryForObject(sql, paramMap, String.class);
+    }
+
+    @GetMapping("car/brand")
+    public List<String> getCarsByBrand(@RequestParam("id") String id) {
+        String sql = "SELECT regnr FROM car WHERE lower(brand) = :a";
+        Map paramMap = new HashMap();
+        paramMap.put("a", id.toLowerCase());
+        return namedParameterJdbcTemplate.queryForList(sql, paramMap, String.class);
+    }
+
+    @GetMapping("car/update")
+    public void updateRegNr(@RequestParam("q") String q1,
+                            @RequestParam("w") Integer w1) {
+        String sql = "UPDATE car SET regnr=:q WHERE id=:w";
+        Map paraMap = new HashMap();
+        paraMap.put("q", q1);
+        paraMap.put("w", w1);
+        namedParameterJdbcTemplate.update(sql, paraMap);
+    }
+    //Exercise
+    //Luua tabel raamatud(id, nimi, aasta, autor)
+    //Luua teenus mis otsib kõik raamatud autori järgi
+    //tagastab NIMI + AASTA query
+    @GetMapping("booksSearchByAuthor")
+    public List<String> searchByAuthor(@RequestParam("author") String author) {
+        String sql = "SELECT name FROM books WHERE author = :a";
+        Map paramMap = new HashMap();
+        paramMap.put("a", author);
+        return namedParameterJdbcTemplate.queryForList(sql, paramMap, String.class);
+    }
+    //http://localhost:8080/booksSearchByAuthor?author=John
+
+    @GetMapping("car/showAll")
+    public List<Car> showAllCars() {
+        String sql = "SELECT * FROM car";
+        Map paraMap = new HashMap();
+        return namedParameterJdbcTemplate.query(sql, paraMap, new CarRowMapper());
+    }
+
+    private class CarRowMapper implements RowMapper<Car> {
+        @Override
+        public Car mapRow(ResultSet resultSet, int i) throws SQLException {
+            Car qwerty = new Car();
+            qwerty.id = resultSet.getInt("id");
+            qwerty.regnr = resultSet.getString("regnr");
+            qwerty.brand = resultSet.getString("brand");
+            return qwerty;
+        }
+    }
 
     @GetMapping("Employee/id/{id}") //show employee by id
     public String showEmployeeById(
@@ -320,7 +383,7 @@ public class SpringController {
     public void updateID(
             @RequestParam("id") int id,
             @RequestParam("name") String name) {
-        for (Employee employee: employeeList) {
+        for (Employee employee : employeeList) {
             if (employee.getName().equals(name))
                 employee.setId(id);
         }
