@@ -25,13 +25,14 @@ DROP DATABASE learningSQLbase; //удалить базу данных learningSQ
 CREATE TABLE users(id INT);
 DROP TABLE users; //удалить
 CREATE TABLE people(
-            id INT NOT NULL AUTO_INCREMENT,     //не может быть пустым, автоматически увеличивается на 1 при добавлении нового элемента
+            id SERIAL NOT NULL,                  //не может быть пустым, автоматически увеличивается на 1 при добавлении нового элемента
             name VARCHAR(30),                   //макс длина строки 30 символов типа varchar (это строка макс 255 символов)
             bio TEXT,                           //биография, внутри TEXT = это до 65000 символов
             birth DATE,
-            email VARCHAR,
+            email VARCHAR,  character varying
             PRIMARY KEY(id)                    //=уникальное поле, не повторяется
                     );
+
 ALTER TABLE people ADD pass VARCHAR(32);    //в подтаблице (главная - shop) добавить поле pass
 ALTER TABLE people DROP COLUMN pass;        //удалить pass из таблицы
 -------------------------------------
@@ -190,7 +191,7 @@ SELECT orders.date_time, people.name
 
 SELECT name AS 'Имя', birth AS 'День Рождения'
     FROM people
-Заголовки столбцов изменились
+Заголовки столб цов изменились
 
 SELECT CONCAT('Имя: ', name, '. День Рождения: ', birth) AS 'Информация'
     FROM people;
