@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//@RequestMapping("bank")
-//тогда в начале гетмаппинг не надо каждый раз писать "банк/"
 @RestController
 public class BankController {
+
     private List<BankAccount> accountList = new ArrayList<>();
 
     @GetMapping("bank/accounts")
