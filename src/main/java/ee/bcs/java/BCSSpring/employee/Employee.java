@@ -1,4 +1,4 @@
-package ee.bcs.java.BCSSpring.controller;
+package ee.bcs.java.BCSSpring.employee;
 
 public class Employee {
 

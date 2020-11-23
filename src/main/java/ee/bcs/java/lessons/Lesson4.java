@@ -1,7 +1,5 @@
 package ee.bcs.java.lessons;
 
-import ee.bcs.java.BCSSpring.controller.Employee;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

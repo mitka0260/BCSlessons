@@ -87,6 +87,7 @@ SELECT * FROM people WHERE id <> 5 AND id <> 2 AND name='Ivan' AND bio IS NULL; 
 SELECT * FROM people WHERE name = 'Ivan' OR id = 4;
 
 SELECT DISTINCT name FROM people;   //в результате НЕ БУДЕТ повторов
+
 SELECT * FROM people LIMIT 2;       //покажет только 2 записи
 SELECT * FROM people LIMIT 2, 3;    //2 пропустит, выведет следующие 3 после двух
 
