@@ -89,7 +89,8 @@ SELECT * FROM people WHERE name = 'Ivan' OR id = 4;
 SELECT DISTINCT name FROM people;   //в результате НЕ БУДЕТ повторов
 
 SELECT * FROM people LIMIT 2;       //покажет только 2 записи
-SELECT * FROM people LIMIT 2, 3;    //2 пропустит, выведет следующие 3 после двух
+SELECT * FROM people LIMIT 2 OFFSET 3;    //3 пропустит, выведет следующие 2 после трёх
+
 
 SELECT * FROM people ORDER BY birth;    //выборка + сортировка
 SELECT * FROM people ORDER BY id DESC;  //сортировка будет в порядке убывания
