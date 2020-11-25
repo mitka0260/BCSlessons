@@ -2,13 +2,9 @@ package ee.bcs.java.BCSSpring.database;
 
 import ee.bcs.java.BCSSpring.bank.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 //@RequestMapping("bank")
 //тогда в начале гетмаппинг не надо каждый раз писать "банк/"
