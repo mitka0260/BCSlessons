@@ -1,7 +1,6 @@
 package ee.bcs.java.BCSSpring.bank;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,17 +41,17 @@ public class BankService {
             throw new RuntimeException("Kogus peab olema positiivne arv");
             //throw new Exception() + try+catch
         }
-            Integer amountOnIbanFrom = bankRepository.getAccountBalanceDB(ibanFrom);
-d
-            if (amountOnIbanFrom >= howMuch) {
-                amountOnIbanFrom = amountOnIbanFrom - howMuch;
-                bankRepository.setAccountBalanceDB(ibanFrom, amountOnIbanFrom);
+        Integer amountOnIbanFrom = bankRepository.getAccountBalanceDB(ibanFrom);
 
-                Integer amountOnIbanTo = bankRepository.getAccountBalanceDB(ibanTo);
-                amountOnIbanTo += howMuch;
-                bankRepository.setAccountBalanceDB(ibanTo, amountOnIbanTo);
-            }
+        if (amountOnIbanFrom >= howMuch) {
+            amountOnIbanFrom = amountOnIbanFrom - howMuch;
+            bankRepository.setAccountBalanceDB(ibanFrom, amountOnIbanFrom);
+
+            Integer amountOnIbanTo = bankRepository.getAccountBalanceDB(ibanTo);
+            amountOnIbanTo += howMuch;
+            bankRepository.setAccountBalanceDB(ibanTo, amountOnIbanTo);
         }
     }
 
 }
+

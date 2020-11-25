@@ -12,12 +12,13 @@ public class MathController {
 
     //аннотация, работает сервер спринга, запускает мой код, ищет весь мой код
     //контроллер - это важный для нас класс, и это спринг знает
+    /*
     @GetMapping(value = "")
     public String helloSpring() {
         return "Hello, Spring!";
     }
 
-    /*
+
     @GetMapping("")
     public String helloSpringPage(
             @RequestParam("name") String name) {
@@ -27,6 +28,12 @@ public class MathController {
             return "Hello, " + name;
     }
      */
+
+    @GetMapping(value = "")
+    public String helloSpring(@RequestParam(value = "name", defaultValue = "Spring") String name) {
+        return "Hello, " + name;
+        //return String.format("Hello %s!", name);
+    }
 
     @GetMapping("math/abs/{n}")
     public String absValuePath(
