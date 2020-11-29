@@ -15,10 +15,23 @@ import java.util.List;
 public class DifficultExercise {
 
     public static void main(String[] args) {
-        //List<String> testList = new ArrayList<>();
         List<String> testList = new MyList();
-        testList.add("String1");
+        testList.add("added string");
         System.out.println(testList.get(0));
+
+        testList.add("second string");
+        System.out.println(testList.get(1));
+
+        System.out.println(testList.size());
+
+        System.out.println(testList.contains("second string"));
+        System.out.println(testList.contains("zopa"));
+        System.out.println(testList.contains("zopa"));
+        testList.remove("second string");
+        System.out.println(testList.size());
+        System.out.println(testList.contains("second string"));
+        testList.remove("pussy");
+        System.out.println(testList.size());
 
     }
 

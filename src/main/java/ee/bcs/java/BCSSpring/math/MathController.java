@@ -18,16 +18,17 @@ public class MathController {
         return "Hello, Spring!";
     }
 
-
+*/
+    /*
     @GetMapping("")
     public String helloSpringPage(
             @RequestParam("name") String name) {
-        if (name=="")
+        if (name==null || name=="")
             return "Hello, Spring";
         else
             return "Hello, " + name;
     }
-     */
+*/
 
     @GetMapping(value = "")
     public String helloSpring(@RequestParam(value = "name", defaultValue = "Spring") String name) {

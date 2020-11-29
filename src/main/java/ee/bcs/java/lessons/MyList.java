@@ -4,27 +4,53 @@ import java.util.*;
 
 public class MyList implements List {
 
-    MyList() {
-
-    }
+    private final Object[] array = new Object[1000];
+    int index = 0;
 
     @Override
     public boolean add(Object o) {
-        return false;
+        array[index] = o;
+        index++;
+        return true;
+    }
+
+    @Override
+    public Object get(int index) {
+        return array[index];
     }
 
     @Override
     public int size() {
-        return 0;
+        return index;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return index == 0;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        int temp = 0;
+        for (int i = 0; i < index; i++) {
+            if (o.equals(array[i])) {
+                temp++;
+                for (int j = i; j < index-1; j++) {
+                    array[j] = array[j+1];
+                }
+            }
+        }
+        index = index- temp;
+        return true;
     }
 
     @Override
     public boolean contains(Object o) {
+        for (int i = 0; i < index; i++) {
+            if (o.equals(array[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -38,10 +64,6 @@ public class MyList implements List {
         return new Object[0];
     }
 
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
 
     @Override
     public boolean addAll(Collection c) {
@@ -56,11 +78,6 @@ public class MyList implements List {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public Object get(int index) {
-        return null;
     }
 
     @Override
