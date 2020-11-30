@@ -25,12 +25,12 @@ public class DifficultExercise {
         System.out.println(testList.size());
 
         System.out.println(testList.contains("second string"));
-        System.out.println(testList.contains("zopa"));
-        System.out.println(testList.contains("zopa"));
+        System.out.println(testList.contains("something"));
+        System.out.println(testList.contains("something"));
         testList.remove("second string");
         System.out.println(testList.size());
         System.out.println(testList.contains("second string"));
-        testList.remove("pussy");
+        testList.remove("anything");
         System.out.println(testList.size());
 
     }
