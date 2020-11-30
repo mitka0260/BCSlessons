@@ -36,6 +36,12 @@ public class MathController {
         //return String.format("Hello %s!", name);
     }
 
+    @GetMapping("testing/min")
+    public int testing(@RequestParam("a") int a,
+                            @RequestParam("b") int b) {
+        return Lesson1.min(a, b);
+    }
+
     @GetMapping("math/abs/{n}")
     public String absValuePath(
             @PathVariable("n") Integer n) {

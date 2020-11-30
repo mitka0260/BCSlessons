@@ -10,6 +10,7 @@ public class BankService {
     private BankRepository bankRepository;
 
     public void createAccountDB(String iban) {
+        //throw new NullPointerException();
         bankRepository.createAccount(iban);
     }
 
