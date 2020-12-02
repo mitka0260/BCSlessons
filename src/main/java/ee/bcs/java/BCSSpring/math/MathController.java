@@ -30,12 +30,12 @@ public class MathController {
     }
 */
 
-    @GetMapping(value = "")
+/*    @GetMapping(value = "")
     public String helloSpring(@RequestParam(value = "name", defaultValue = "Spring") String name) {
         return "Hello, " + name;
         //return String.format("Hello %s!", name);
     }
-
+*/
     @GetMapping("testing/min")
     public int testing(@RequestParam("a") int a,
                             @RequestParam("b") int b) {

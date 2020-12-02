@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <title>First title after 25 years</title>
+</head>
+
+<body>
+<script>
+    alert("First JavaScript!!!");
+    alert(   "Hello"    );
+</script>
+<h1><b><i>
+    First step to become a kick-ass web-developer is done
+</b></i></h1>
+<pre>preformatted text, my       spaces are       taken into            account</pre>
+
+<table border="3">
+    <tr>
+        <td>First</td>
+        <td>Second</td>
+        <td>Third</td>
+    </tr>
+</table>
+
+<br>
+html classical input elements<br>
+<input type="hidden">
+<input type="text">
+<textarea></textarea>
+<input type="password">
+<input type="radio" name="a">
+<input type="radio" name="a">
+<input type="radio" name="a">
+<input type="checkbox">
+<select>
+    <option>1</option>
+    <option>2</option>
+</select>
+<input type="file"><br><br>
+
+html5 input elements
+<input type="number">
+<input type="email">
+<input type="date">
+<input type="datetime-local">
+<input type="week">
+<input type="month">
+<input type="time">
+<input type="color">
+<input type="range">
+<input type="tel">
+<br><br>
+
+Buttons:
+<button type="reset">Clear fields</button>
+<button type="submit">Send</button>
+<button type="image" src="https://wordyblend.com/wp-content/uploads/2017/03/bootstrap-solid.jpg">hello</button>
+
+<br>
+<br>
+<input id="sisestus123" placeholder="sisesta midagi">
+
+
+<input id="sisestus" value="sisesta midagi">
+<button id="pressMe">Press Me</button>
+<br><br>
+<button id="add10rows">Add 10 rows</button>
+<table border="1" id="tabel">
+    <tr>
+        <td>First</td>
+        <td>Second</td>
+        <td>Third</td>
+    </tr>
+</table>
+<script>
+//lisab uhte rida
+    let uusRida = document.createElement("tr");
+    let uusTulp = document.createElement("td");
+    uusTulp.innerText = "uus rida";
+    uusRida.appendChild(uusTulp);
+    let tabel = document.getElementById("tabel");
+    tabel.appendChild(uusTulp);
+
+    let button = document.getElementById("pressMe");
+    let input = document.getElementById("sisestus");
+    button.onclick = function() {
+    button.innerText = input.value;
+    alert(input.value);
+    }
+
+    let button1 = document.getElementById("add10rows");
+    button1.onclick = function1() {
+
+    for (let i = 0; i < 10; i++) {
+        let uusRida1 = document.createElement("tr");
+        let uusTulp1 = document.createElement("td");
+        uusTulp1.innerText = "uus rida" + i;
+        uusRida1.appendChild(uusTulp1);
+        let tabel = document.getElementById("tabel");
+        tabel.appendChild(uusTulp1);
+    }
+    }
+
+
+
+</script>
+
+
+</body>
+
+
+</html>
