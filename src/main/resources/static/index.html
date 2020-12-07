@@ -1,26 +1,26 @@
 <html>
 
 <head>
-    <title>First title after 25 years</title>
+    <title>First title after 20 years</title>
 </head>
 
 <body>
 <script>
     alert("First JavaScript!!!");
-    alert(   "Hello"    );
 </script>
 <h1><b><i>
     First step to become a kick-ass web-developer is done
-</b></i></h1>
+</i></b></h1>
 <pre>preformatted text, my       spaces are       taken into            account</pre>
 
 <table border="3">
     <tr>
-        <td>First</td>
+        <td><input id="sisestus1" placeholder="sisesta midagi"></td>
         <td>Second</td>
         <td>Third</td>
     </tr>
 </table>
+<button id="pressMe1">Vajuta mind</button>
 
 <br>
 html classical input elements<br>
@@ -28,9 +28,9 @@ html classical input elements<br>
 <input type="text">
 <textarea></textarea>
 <input type="password">
-<input type="radio" name="a">
-<input type="radio" name="a">
-<input type="radio" name="a">
+<input name="a" type="radio">
+<input name="a" type="radio">
+<input name="a" type="radio">
 <input type="checkbox">
 <select>
     <option>1</option>
@@ -54,54 +54,67 @@ html5 input elements
 Buttons:
 <button type="reset">Clear fields</button>
 <button type="submit">Send</button>
-<button type="image" src="https://wordyblend.com/wp-content/uploads/2017/03/bootstrap-solid.jpg">hello</button>
+<button src="https://wordyblend.com/wp-content/uploads/2017/03/bootstrap-solid.jpg" type="image">hello</button>
 
 <br>
 <br>
 <input id="sisestus123" placeholder="sisesta midagi">
 
 
-<input id="sisestus" value="sisesta midagi">
 <button id="pressMe">Press Me</button>
 <br><br>
-<button id="add10rows">Add 10 rows</button>
+
 <table border="1" id="tabel">
     <tr>
-        <td>First</td>
+        <td><input id="sisestus" value="sisesta midagi"></td>
         <td>Second</td>
         <td>Third</td>
     </tr>
 </table>
-<script>
-//lisab uhte rida
-    let uusRida = document.createElement("tr");
-    let uusTulp = document.createElement("td");
-    uusTulp.innerText = "uus rida";
-    uusRida.appendChild(uusTulp);
-    let tabel = document.getElementById("tabel");
-    tabel.appendChild(uusTulp);
+
+<!-- Lisada javascriptiga tabelisse 1 rida -->
+<button id="addOneRow" onclick="addRow()">Add 1 row</button>
+<br>
+
+<!-- Lisada HTML-i nupp -->
+<!-- Lisada javascriptiga onclick action, mis vajutades lisab tabelisse 10 rida -->
+<button id="add10rows" onclick="addTenRows()">Add 10 rows</button>
+<br>
+
+<!-- Muuta nuppu vajutus funktsioon. Juhul kui vajutatakse lisatakse nii mitu rida kui on number varem mainitud input väljas -->
+<input id="inputEx" placeholder="Sisesta oma lemmiknumber" type="text">
+
+<script type="text/javascript">
+    function addRow(a = 1, b = "") {
+        //lisab uhte rida
+        b = document.getElementById("inputEx").value;
+        let uusRida = document.createElement("tr");
+        let uusTulp1 = document.createElement("td");
+        let uusTulp2 = document.createElement("td");
+        let uusTulp3 = document.createElement("td");
+        uusTulp1.innerText = "uus rida" + a + " " + b;
+        uusTulp2.innerText = "uus rida" + a + " " + b;
+        uusTulp3.innerText = "uus rida" + a + " " + b;
+        uusRida.appendChild(uusTulp1);
+        uusRida.appendChild(uusTulp2);
+        uusRida.appendChild(uusTulp3);
+        let tabel = document.getElementById("tabel");
+        tabel.appendChild(uusRida);
+    }
+
+    //Lisada javascriptiga 10 rida (kasutades tsüklit)
+    function addTenRows() {
+        for (let i = 1; i <= 10; i++) {
+            addRow(i);
+        }
+    }
 
     let button = document.getElementById("pressMe");
     let input = document.getElementById("sisestus");
-    button.onclick = function() {
-    button.innerText = input.value;
-    alert(input.value);
+    button.onclick = function () {
+        button.innerText = input.value;
+        alert(input.value);
     }
-
-    let button1 = document.getElementById("add10rows");
-    button1.onclick = function1() {
-
-    for (let i = 0; i < 10; i++) {
-        let uusRida1 = document.createElement("tr");
-        let uusTulp1 = document.createElement("td");
-        uusTulp1.innerText = "uus rida" + i;
-        uusRida1.appendChild(uusTulp1);
-        let tabel = document.getElementById("tabel");
-        tabel.appendChild(uusTulp1);
-    }
-    }
-
-
 
 </script>
 

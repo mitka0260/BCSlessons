@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    console.log("Type of 6 is: " + typeof 6);
+    console.log("Type of x is: " + typeof "x");
+    console.log("Is this true or false 3 < 2: " + (3 < 2));
+    console.log("Max value is: " + Math.max(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+    let number = 10; //Number(prompt("Enter a number"));
+    if (!Number.isNaN(number)) {
+        console.log("square of this number is: " + (number * number));
+    } else {
+        console.log("entered symbol is not a number")
+    }
+
+    if (number < 10)
+        console.log("small number");
+    else if (number < 100)
+        console.log("middle number");
+    else
+        console.log("big number");
+
+    let evenNr = 0;
+    while (evenNr <= 20) {
+        console.log("Next even nr is: " + evenNr);
+        evenNr = evenNr + 2;
+    }
+
+    let result = 1;
+    let counter = 0;
+    while (counter < 10) {
+        result = result * 2;
+        counter = counter + 1;
+    }
+    console.log("2 in power 10 is " + result);
+
+    let yourName;
+    do {
+        yourName = prompt("Who are you?");
+    }
+    while (!yourName);
+    console.log(yourName);
+    <!-- этот цикл ВСЕГДА выполняется хотя бы один раз - проверка условия выполняется после выполнения цикла -->
+
+    for (let number1 = 0; number1 < 12; number1 = number1 + 2) {
+        console.log(number1);
+    }
+
+    for (let current = 20; ; current += 1) {
+        if (current % 7 == 0) {
+            console.log(current);
+            break;
+        }
+    }
+
+    <!-- замена if - else if - else -->
+    // замена if - else if - else
+    switch (prompt("Какая сейчас погода?")) {
+        case "rain":
+            console.log("take umbrella");
+            break;
+        case "sun":
+            console.log("not a winter now");
+            break;
+        default:
+            console.log("don't care");
+            break;
+    }
+
+    for (let n = 1; n <= 20; n++) {
+        let output = "";
+        if (n % 3 == 0) output += "Fizz";
+        if (n % 5 == 0) output += "Buzz";
+        if (n % 3 == 0 && n % 5 == 0) output = "FizzBuzz";
+        console.log(output || n);
+    }
+
+    let size = 8;
+    let string = "";
+    for (let vert = 0; vert < size; vert++) {
+        for (let hor = 0; hor < size; hor++) {
+            if ((vert + hor) % 2 == 0)
+                string = string + " ";
+            else
+                string = string + "*";
+        }
+        string = string + "\n";
+    }
+    console.log(string);
+
+    //function example
+    const square = function (x) {
+        return x * x;
+    }
+    console.log(square(12));
+
+    //эта функиция выполняется в том порядке, в каком написана
+    const hummus = function (factor) {
+        const ingredient = function (amount, unit, name) {
+            let ingredientAmount = amount * factor; //factor виден здесь хоть он из другой области
+            if (ingredientAmount > 1) {
+                unit += "s";
+            }
+            console.log(`${ingredientAmount} ${unit} ${name}`);
+        };
+        ingredient(1, "can", "chickpeas");
+        ingredient(0.25, "cup", "tahini");
+        ingredient(0.25, "cup", "lemon juice");
+        ingredient(1, "clove", "garlic");
+        ingredient(2, "tablespoon", "olive oil");
+        ingredient(0.5, "teaspoon", "cumin");
+    };
+    hummus(2);
+
+    //при такой записи неважно, что функция объявлена после её вызова
+    console.log("Voice from future:", future());
+
+    function future() {
+        return "No flying machines more";
+    }
+
+    //ещё способ записи функции
+    const power = (base, exponent) => {
+        let result = 1;
+        for (let count = 0; count < exponent; count++) {
+            result *= base;
+        }
+        return result;
+    };
+    console.log(power(2, 5));
+
+    //можно и упрощать (когда аргумент только один и когда результат выводиться в 1 строку
+    const square1 = (x) => {
+        return x * x;
+    }
+    const square2 = x => x * x;
+
+    function square3(x) {
+        return x * x;
+    }  //у функции ОДИН аргумент
+    console.log(square(4, 5, 6)); //вызывает с тремя аргументами, два - игнорируются
+
+    //можно и так использовать эту особенность
+    function minus(a, b) {
+        if (b == undefined)
+            return -a;
+        else
+            return a - b;
+    }
+
+    //или ещё так
+    function power1(base, exponent = 2) { //если при вызове функции не задан второй аргумент, то вместо него будет использоваться 2
+        let result = 1;
+        for (let count = 0; count < exponent; count++) {
+            result *= base;
+        }
+    }
+
+    console.log(power(4));
+
+    //why to do so?
+    function multiplier(factor) {
+        return number => number * factor;
+    }
+
+    let twice = multiplier(2);
+    console.log(twice(5));
+
+    //recursion
+    function power_rec(base, exponent) {
+        if (exponent == 0) {
+            return 1;
+        } else {
+            return base * power_rec(base, exponent - 1);
+        }
+    }
+
+    console.log(power_rec(2, 3));
+
+    //recursion - как получить к-л число только если можно +5 или *3
+    function findSolution(target) {
+        function find(current, history) {
+            if (current == target) {
+                return history;
+            } else if (current > target) {
+                return null;
+            } else {
+                return find(current + 5, `(${history} + 5)`) ||
+                    find(current * 3, `(${history} * 3)`);
+            }
+        }
+
+        return find(1, "1");
+    }
+
+    console.log(findSolution(24));
+
+    printFarmInventory(7, 11); //выводит всегда три знака, т.е добавляет нули в начало сколько надо
+    function printFarmInventory(cows, chickens) {
+        let cowString = String(cows);
+        while (cowString.length < 3) {
+            cowString = "0" + cowString;
+        }
+        console.log(cowString); //console.log(`${cowString} коров`);
+        let chickenString = String(chickens);
+        while (chickenString.length < 3) {
+            chickenString = "0" + chickenString;
+        }
+        console.log(chickenString); //console.log(`${chickenString} цыплят`);
+    }
+
+    //здесь одна и та же функция вызывается дважды - нет смысла, надо сделать одну функцию
+    //эти функции вызываются ради ПОБОЧНОГО ЭФФЕКТА - печать в консоль
+
+    //погнали
+    function zeroPad(number, width) {
+        let numberString = String(number);
+        while (numberString.length < width) {
+            numberString = "0" + numberString;
+        }
+        return numberString;    //эта функция создана для возвращаемого значения - так ЛУЧШЕ, она ПОЛЕЗНЕЕ
+    }
+
+    function printFarm(cows, chickens, pigs) {
+        console.log(`${zeroPad(cows, 3)} коров`);
+        console.log(`${zeroPad(chickens, 3)} цыплят`);
+        console.log(`${zeroPad(pigs, 3)} свиней`);
+
+    }
+
+    printFarm(7, 16, 3);
+
+    //ещё есть ЧИСТАЯ функция - она не зависит от окружения
+
+    function min(a, b) {
+        if (a < b)
+            return a;
+        else
+            return b;
+    }
+
+    console.log("Min value is: " + min(5, 2));
+
+    function isEven(a) {
+        if (a < 0) {
+            //console.log("Number is negative");
+            return "Number is negative";
+            //так плохо, потому что когда вводишь отриц значение он продолжает дальше выполнять метод
+        } else if (a == 0)
+            return true;
+        else if (a == 1)
+            return false;
+        else
+            return isEven(a - 2);
+    }
+
+    console.log("Number is even: " + isEven(75));
+
+
+    /*
+    Напишите функцию countBs, которая принимает строку в качестве единственного аргумента и
+    возвращает число, показывающее, сколько больших букв B содержится в этой строке.
+     */
+    function countBs(string) {
+        let countB = 0;
+        for (let i = 0; i < string.length; i++) {
+            if (string[i] == "B")
+                countB += 1;
+        }
+        return countB;
+    }
+
+    console.log("Quantity of symbols B is: " + countBs("lets B go BhomeB"));
+
+    /*
+    напишите функцию countChar, которая ведет себя как countBs, за исключением того,
+    что принимает второй аргумент, указывающий, какие именно символы нужно посчитать
+    (вместо того чтобы считать только большие буквы B).
+    Перепишите countBs, чтобы использовать эту новую функцию.
+     */
+    function countChar(string, symbol) {
+        let count = 0;
+        for (let i = 0; i < string.length; i++) {
+            if (string[i] == symbol) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    console.log("Quantity of symbols are: " + countChar("lets go home", "e"));
+
+</script>
+
+</body>
+</html>
+
+
+<!
+экранирование символа \: \" - покажет кавычку
+
+`половина от 100 равна ${100/2}`
+
+Строки, заключенные в обратные кавычки, обычно называемые литералами шаблонов, позволяют выполнять еще
+несколько хитрых трюков. В них можно не только разделять строки, но
+и встраивать другие значения.
+
+
+>

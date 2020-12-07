@@ -1,0 +1,96 @@
+body {
+    font-family: "Times New Roman";
+    font-size: 10pt;
+    background-image: url(http://site.org/img/pic.jpg);
+}
+
+p {
+    margin-left: 20px;
+    margin-right: 1000px;
+    margin-top: 20px;
+    padding: 0px 0px 0px 20px;
+    border-left-width: medium;
+
+    font-size: 8;
+    font-family: Arial;
+    font-color: yellow;
+    font-weight: bold; /*100-700*/
+    background-color: grey;
+    text-indent: 4em; /*размер красной строки*/
+    text-align:justify; /*по ширине*/
+    text-decoration: overline; /*underline, line-through, nont*/
+    letter-spacing: 3px; /*внутри текстовые интервалы*/
+    word-spacing: 10px; /*между слов интервалы*/
+    line-height: 10px;
+    text-transform: uppercase;
+}
+
+h1, h2 {
+    color: blue;
+    color: rgb(0, 255, 0);
+    font-family: "Times New Roman"
+}
+
+h3.titlepage {
+    color: red /*для всех элементов помеченных как class=titlepage*/
+}
+
+#any {
+    color: red
+}
+
+PRECITE {
+    font-size: 15
+}
+
+/*for all cites that are inside pre*/
+
+A:visited {
+    color: red
+}
+
+/*all visited links are in red*/
+
+div {
+    margin: 20;
+    padding: 20;
+    text-align: center;
+    border-style:solid;
+    border-width:medium
+}
+
+UL {
+    color:green;
+    list-style-type: disk /*painted circle*/
+}
+
+IMG {
+    filter: blur(50);
+}
+/*
+opacity - прозрачность
+drop-shadow - тень
+grayscale - в чёрно-белый
+invert - инверсия цветов
+saturate
+sepia
+brightness
+contrast
+*/
+
+
+/*
+comment in css
+
+простой селектор - название тега html
+универсальный селектор - *
+
+единицы измерения:
+em = font-size для того же элемента
+ex = высоте буквы х того же элемента
+px = пиксель
+rem = размеру шрифта элемента html
+ */
+
+<!--
+comment-- >

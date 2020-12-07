@@ -12,8 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-class BcsSpringApplicationTests {
+@AutoConfigureMockMvc //need this in Spring Boot test
+public class BcsSpringApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;

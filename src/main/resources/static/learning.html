@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Learning HTML</title> <! title не обязателен, может содержать только текст, нельзя <i></i и пр>
+    <meta charset="UTF-8">
+
+    <!-- <base href="http://it.org" target="frame_name" -->
+    <!-- во все ссылки на этой странице этот адрес будет добавлен в начало, то есть дальше можно писать <a
+        href="/continued/address" можно использовать много раз в лбых местах действует до следующего такого же тага -->
+
+    <meta name="description" content="learning html">
+    <!-- свойства документа - автор, ключевые слова, кодировка -->
+    <meta http-equiv="">
+    <! доступ к полям http-заголовка>
+    <meta http-equiv="refresh" content="9999999">
+    <! принудительная перезагрузка страницы каждые 30 секунд>
+    <meta http-equiv="pragma" content="no-cache">
+    <! запрет кэшировать документ >
+    <meta name="keywords" content="bcs, html, learning">
+
+    <link>
+    <! подключение css>
+
+    <style type="text/css">
+        h1 {
+            color: red;
+            border-width: 3;
+            border-style: solid;
+            text-align: center;
+            border-color: yellow;
+        }
+
+        #cite {
+            text-align: right;
+            color: #45525b;
+            font-style: italic;
+        }
+
+        p.ssyl {
+            text-align: center
+        }
+
+        abbr {
+            border-bottom: 1px dashed red; /*пунктирное подчёркивание */
+            color: #000080; /*dark blue*/
+        }
+    </style>
+    <! описание стиля, если есть совпадение по именам со стилем из link, то эти его перекрывают>
+
+    <script type="text/javascript"></script>
+    <! JavaScript, VBScrips, JScript>
+
+    </head>
+
+
+<body
+        alink="red"
+        link="blue"
+        vlink="grey"
+        bgcolor="black"
+        text="white"
+        leftmargin="100"
+        rightmargin="100"
+        topmargin=150
+        scroll="yes"
+        bgproperties="nonfixed"
+>
+<! лучше вместо этих атрибутов использовать css >
+<h1 align="left">First use of style-tag</h1>
+<h2 align="right">Musicians</h2>
+<h3>знаки больше/меньше можно писать так: &lt; less than &gt; greater than &amp; ampersand &quot;</h3>
+<h4>Musicians</h4>
+<h5>Musicians</h5>
+<h6>Musicians</h6>
+
+<p class="ssyl">Text with p class=ssyl - centered</p>
+<p>Второй абзац</p>
+
+<! Comment>
+
+<div id="cite" lang="en-us">Some text with tag id = cite - right, some color, italic</div>
+<! lang обозначает язык текста внутри тега; нужен поисковикам, синтезаторам речи>
+
+<br><br>
+Structured text formatting:<br>
+<abbr title="Virtual reality">VR</abbr> <! аббревиатура ><br>
+<cite>цитата - should be shown is coursive</cite><br>
+<code>code example for i = 1 to 999</code><br>
+<dfn>defenition example, function is junction between x and y</dfn><br>
+<em>this coursiv is better than i</em><br>
+<kbd>text typed by user from keyboard</kbd><br>
+<mark>marked text</mark>
+<br>
+<samp>report example</samp><br>
+<strong>strong text</strong><br>
+<var title="this is comment to this tag that is shown when mouse on it">instance of variable</var><br>
+example of correction of the text, was
+<del datetime="2020-10-02">300</del>
+, became
+<ins>666</ins>
+<pre>preformatted text is shown as   typed</pre>
+
+<br>
+Physical formatting: (not good formatting)<br>
+<b>bold text, better way to yse strong-tag</b><br>
+<i>italic text, better to use var, em, dfn, cite</i><br>
+<ruby>annotation/ruby text with
+    <rt> annotation RT</rt>
+</ruby>
+<br>
+<s>striked text</s><br>
+<small>small text</small><br>
+x<sub>subscript</sub><br>
+x<sup>superscript</sup><br><br>
+
+<q>small citation</q>
+<blockquote>big citation, shown to left from other text + empty strings up and down <br><cite>source:
+    www.books.ru</cite></blockquote>
+<IMG src="http://localhost:63342/BCSlessons/BCSSpring/static/062999_Estonia03.jpg">
+picture was taken in Tallinn by Metallica<br><br>
+<IMG src="http://localhost:63342/BCSlessons/BCSSpring/static/062999_Estonia03.jpg" align="left">
+text is aligned around picture
+<br clear=left>aligning was stopped<br><br>
+now its time to insert horisontal line<br>
+<hr size="10" width="50%" color="red" align="left">
+<br>
+There is hidden text after this:
+<details>
+    <summary>show spoiler</summary>
+    hidden text
+</details>
+<br><br>
+
+LISTS:<br>
+<ul type=square>
+    <li>books1</li>
+    <li>books2</li>
+</ul>
+<ol type="a">
+    <li value="3">book1</li>
+    <li>book2</li>
+</ol>
+Definition list - толковый словарь
+<dl>
+    <dt>term1</dt>
+    <dd>definition description1</dd>
+    <dt>term2</dt>
+    <dd>definition description2</dd>
+</dl>
+
+Menu list:
+<menu>
+    <li>new</li>
+    <li>open</li>
+</menu>
+
+TABLES:<br>
+<table frame=above rules=all border="3" width="400" align="center" cellspacing="5" cellpadding="30" bgcolor=blue>
+    <caption align=bottom>table title</caption>
+    <tr>
+        <th align=middle>1header</th>
+        <th align=middle rowspan="2">2it will be junction with lower cell and will introduce between them</th>
+        <th align=middle>3header</th>
+        <th align=middle>4header</th>
+        <th align=middle>5header</th>
+        <th align=middle>6header</th>
+    </tr>
+    <tr bgcolor="aqua">
+        <td>7table data</td>
+        <td>8table data</td>
+        <td colspan=2>9this cell will push away the cell on the right</td>
+        <td nowrap>10will bw written in one row without breaking line</td>
+        <td>11table data</td>
+        <td>12 this should be deleted to get beautiful table</td>
+    </tr>
+</table>
+
+<meta http-equiv="Content-Type" content="text/javascript">
+<script>
+    window.onload = function() {
+        var drawingCanvas = document.getElementById('smile');
+        if(drawingCanvas && drawingCanvas.getContext()) {
+            var context = drawingCanvas.getContext('2d');
+
+            context.strokeStyle = "#f00";
+            context.fillStyle = "#f00";
+            context.beginPath();
+            context.arc(300, 100, 100, 0, Math.PI*2, true);
+            context.closePath();
+            context.stroke();
+            context.fill();
+        }
+    }
+</script>
+<canvas id="smile" width="200" height="200"></canvas>
+
+LINKS<br>
+<a href="https://www.bcskoolitus.ee/koolitus/java-arendaja-ohtuope-2">Link to BCS training course</a>
+<br>
+<a href=#VR>Link to virtual reality</a>
+<h3 id=VR>Here is text about virtual reality</h3>
+<a href="http://www.metallica.com" target="_blank"><IMG src=062999_Estonia03.jpg width="10%"></a>
+
+<br><br>
+Multimedia<br>
+Object - это объект мультимедиа. Файл в нём есть его содержимое><br>
+ещё есть embed, img, iframe<br>
+<!--
+<audio src="01%20-%20Futureal.mp3" controls="controls" autoplay="" autostart=false></audio>
+<video width=200 height=200 src="Adele_Skyfall_(Lyric_Video).mp4" controls="controls" autoplay=""  autostart=false></video>
+<br>
+<EMBED src="Adele_Skyfall_(Lyric_Video).mp4">
+<object data="Adele_Skyfall_(Lyric_Video).mp4" border="2">
+    <param name="autostart" value=false>
+</object>
+-->
+
+</body>
+</html>

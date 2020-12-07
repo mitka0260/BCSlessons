@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, World!</title>
+</head>
+<body>
+
+<h1>Hello, World!</h1>
+<p>My
+    <em>first</em>
+    <strong>web-page</strong>
+</p>
+
+<p>One more <em><strong>paragraph</strong></em></p>
+
+<p>
+    <a href="http://www.satriani.com" target="_blank" title="Check Satriani news">Link to another site</a>
+</p>
+
+<script>
+    let message = "Hello, World!";
+    console.log(message);
+
+    let words = ["programm", "makaka", "beautiful", "panncake"];
+    let word = words[Math.floor(Math.random() * words.length)];
+
+    let answerArray = [];
+    for (let i = 0; i < word.length; i++) {
+        answerArray[i] = "_";
+    }
+    let remainingLetters = word.length;
+
+    while (remainingLetters > 0){
+        alert(answerArray.join(" "));
+        let guess = prompt("Enter some letter or press enter to exit");
+        if (guess === null) { break; }
+        else if (guess.length !== 1 ) {
+            alert("Only one letter");}
+            else {
+                for (let j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--;
+                    }
+                }
+            }
+        }
+        alert(answerArray.join(" "));
+    alert("Great! Word was: " + word);
+</script>
+
+
+
+</body>
+</html>

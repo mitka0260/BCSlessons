@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Lesson1Test {
 
+    // funktsiooniNimi_sisend_eeldatavVäljund
     @Test
     public void min_twoValues_minValue() {
         int result = Lesson1.min(9, -1000);
@@ -25,7 +26,7 @@ public class Lesson1Test {
     }
 
     @Test
-    public void neg_negValue_posValue() {
+    public void neg_negValue_negValue() {
         int result = Lesson1.neg(-4);
         assertEquals(-4, result);
 

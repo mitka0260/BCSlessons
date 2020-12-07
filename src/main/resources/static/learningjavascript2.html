@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //ARRAYS
+    let listOfNumbers = [2, 3, 5, 7, 11];
+    console.log(listOfNumbers[0]);
+    console.log(listOfNumbers.length);  //или можно array["length"]
+    listOfNumbers.push(20); //add to the end of array
+    console.log(listOfNumbers);
+    console.log(listOfNumbers.pop());   //delete from the end of massive and RETURN it
+    console.log(listOfNumbers);         //стековый принцип
+    listOfNumbers.unshift(1); //добавить элемент в начало
+    listOfNumbers.shift(); //убрать элемент из начала массива
+    listOfNumbers.indexOf(11); //выведет индекс элемента 11
+    listOfNumbers.lastIndexOf(11); //выведет индекс элемента 11 но поиск начинает С КОНЦА
+    listOfNumbers.slice(2,6); //с какого по какой индекс будет искать (будет искать со 2 до 6-1, вернёт МАССИВ
+    //concat - с клеивает массивы
+    //remove(array, index) удаляет элемент из массива
+    //value.color - такое обращение идёт когда я ТОЧНО знаю что именно так называется свойство color
+    //value[2] - когда надо что-то вычислить перед обращению к свойству
+
+    let doh = "hello";
+    console.log(typeof doh);    //string
+    console.log(typeof doh.toUpperCase());  //string
+    console.log(typeof doh.toUpperCase);    //function
+    console.log(doh.toUpperCase()); //HELLO
+
+    //OBJECT
+    let day1 = {
+        squirrel: false,
+        events: ["work", "pushing a tree", "eat pizza", "running"]
+    };
+    console.log(day1);
+    //свойства разделены запятыми
+    //после имени свойства стоят : дальше значения этих свойств
+    let descriptions = {
+        work: "Go to work",
+        "pushing a tree": "I pushed a tree with my hands"
+    };
+
+    //String
+    console.log(  "anywords".slice(3, 6)    ); //отрезать часть слова
+    console.log(  "anywords".indexOf("w")              );
+    console.log(  "     words \n        ".trim()          ); //удалит пробелы символы переводы строки-табуляции и др из начала и конца строки
+
+    let string = "sjnsd jsdj sdjnms";
+    let words = string.split(" "); //разделит строку по " ", вернёт массив
+    words.join(". "); //вернёт массив со словами с точкой между ними
+    "word".repeat(3); //повтрит строку 3 раза
+    console.log(string[5]);
+    console.log(string.length);
+
+    //Напишите функцию range, которая принимает два аргумента, start и end,
+    //и возвращает массив, содержащий все числа от start до end включительно.
+    function range (start, end) {
+        let listOfNumbers1 = [];
+        for (let i = start; i <=end; i++) {
+            listOfNumbers1.push(i);
+        }
+        return listOfNumbers1;
+    }
+    console.log(range(2, 5));
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

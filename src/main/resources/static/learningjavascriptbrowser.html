@@ -1,0 +1,262 @@
+<!DOCTYPE html> <!-- это обозначение страницы с современным html -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My homepage</title>
+</head>
+<body>
+
+<h1>My homepage</h1>
+<p>Hello, my name is Marijn, and this is my homepage</p>
+<p id="p-test">Also, I wrote the book about JavaScript. You can read it
+    <a href="https://eloquentjavascript.net" target="_blank">here</a>.</p>
+<button ; onclick="document.getElementById('p-test').innerText=`New text`">Press to change text</button>
+<br>
+<a href="http://www.metallica.com">Metallica</a>
+
+<!--
+<script>
+    let pExp = document.getElementById("p-test");
+    console.log(pExp);
+    alert();
+    pExp.innerHTML = "New text";
+</script>
+-->
+<!--
+Структура:
+html
+    head
+        title
+    body
+        h1
+        p
+        p
+            a href
+
+
+HTTP - hypertext transfer protocol
+запрос GET /index.html HTTP/1.1
+
+80 - порт для подключения компа к интернету
+25 порт smtp для отправки почты
+
+TCP - transmission control protocol: обесчпечивает абстракцию сети
+один комп прослушивает/ожидает сеть - сервер, другие могут с ним заговорить - клиенты
+каждому слушателю назначен свой порт
+
+WEB world wide web
+набор протоколов и форматов, которые позволяют посещать интернет-страницы через браузер
+
+URL uniform resource locator
+имя документа в web
+
+IP-адрес = адрес компа ~имя сервера в назании ссылки на ч-л
+
+HTML hypertext markup protocol
+
+ -->
+
+<!-- Можно писать код во внешнем файле:
+<script src="code/code.js"></script>
+Можно полгружать ES-модули:
+<script type="module"></script>
+-->
+
+<h1>ПРОВЕРКА</h1>
+<script>
+    alert("Привет!");
+</script>
+
+<button onclick="alert('Бабах!');">don't press me</button>
+<br>
+
+<!--
+document
+document.head
+document.body
+document.documentElement
+
+DOM - document object model - вз-ие javascript со страницей, система структурирования страниц
+деление html на блоки, блоку соответствует объект (у блока могут быть вложенные блоки)
+
+Доступ к объектам обеспечивает глобальная привязка document - имеет свои свойства head и body (такие же есть у каждого
+html)
+documentElement - свойство document - ссылается на документ, представляющий тег html
+
+Структура "дерево" - развлетвлённая структура, БЕЗ циклов, только ОДИН корень
+корень DOM - document.documentElement
+Узлы - теги
+Листья - узлы без дочерних элементов (текст, комментарии)
+
+document.body - узел
+каждый объект узла имеет свойство nodeType (содержит код типа узла)
+Node.ELEMENT_NODE - константное свойство - код 1
+Node.TEXT_NODE - текстовые узлы - код 3
+Node.COMMENT_NODE - каменты - код 8
+
+childNodes - свойство узлов элементов DOM - содержит (~массив) экземпляр типа NodeList длинной length, которые он
+содержит
+(и другими свойствами), но нет методов slice & map. 0 - h1, 1 - p, 2 - p
+children - содержит только дочерние элементы типа 1 (это = не все узлы) (без текстовых) - тип 1
+parentNode - указывает на родительский узел
+firstChild - первый элемент в блоке
+lastChild - послдений элемент/узел в блоке
+previousSibling - предыдущий узел (того же родителя)
+nextSibling - следующий узел (того же родителя)
+-->
+
+<script>
+    /*
+    Следующая функция сканирует документ,
+    находит текстовые узлы, содержащие заданную строку, и возвращает true,
+    если таковая найдена
+     */
+
+    function talksAbout(node, string) {
+        if (node.nodeType == Node.ELEMENT_NODE) {
+            for (let i = 0; i < node.childNodes.length; i++) {
+                if (talksAbout(node.childNodes[i], string)) {
+                    return true;
+                }
+            }
+            return false;
+        } else if (node.nodeType == Node.TEXT_NODE) {
+            return node.nodeValue.indexOf(string) > -1;
+        }
+    }
+
+    console.log("Any text contains word BOOK: " + talksAbout(document.body, "book"));
+    /*
+    То есть, можно шерстить весь документ. Но это неудобно, так как структура страницы
+    может измениться и тогда надо всё переписывать
+    Также сложно то, что пробел между узлами - это тоже узел
+    Проще так: команда: получить первую ссылку в документе
+     */
+    let link = document.body.getElementsByTagName("a")[0];
+    console.log(link);
+    let links = document.body.getElementsByTagName("a"); //вернёт массивоподобный объект
+    console.log(links);
+    //лучше искать так:
+    let element = document.getElementById("idOfElement");
+    //или
+    let element1 = document.getElementsByClassName("classOfElement");
+
+    //КАК ИЗМЕНЯТЬ ДОКУМЕНТ
+    //remove - удалить узел
+    //appendChild - добавить дочерний узел в конец списка дочерних элементов
+    //insertBefore(nodeToInsert, elementBeforeWhichInsert);
+    //replaceChild(newNode, nodeForChange);
+    document.body.insertBefore(links[1], links[1]); //удалит ссылку1 и вставит её перед ссылкой0
+    links = document.body.getElementsByTagName("a");
+    console.log(links);
+    //можно преобразовать коллекцию в массив:
+    let array = Array.from(links); //получили фиксированную коллекцию=массив
+    console.log(array);
+</script>
+
+
+<img alt="Metallica in Tallinn" src="062999_Estonia03.jpg"><br>
+<button onclick="replaceImages()">Replace</button>
+<br>
+
+
+<script>
+    //Создание узлов
+    //заменим картинки текстом (текст взят из тега alt картинки)
+    function replaceImages() {
+        let images = document.body.getElementsByTagName("img");
+        for (let i = images.length - 1; i >= 0; i--) {
+            //начинает перебирать с конца, т.к возвращённый список является динамическим - сам обновляется
+            //если начать с начала, то удаление первого элемента приведёт к изменению списка
+            // и цикл остановится приследующей итерации
+            let image = images[i];
+            if (image.alt) {
+                let text = document.createTextNode(image.alt);
+                image.parentNode.replaceChild(text, image);
+            }
+        }
+    }
+</script>
+
+<blockquote id="quote">Here is text with some quote<br>Source of quote is added by JavaScript</blockquote>
+<br>
+
+<script>
+    function elt(type, ...children) {
+        let node = document.createElement(type); //createElement принимает имя тега и возвращает пустой узел этого же типа
+        for (let child of children) {
+            if (typeof child != "string")
+                node.appendChild(child);
+            else
+                node.appendChild(document.createTextNode(child));
+        }
+        return node;
+    }
+
+    document.getElementById("quote").appendChild(
+        elt("footer", "-",
+            elt("strong", "Karl Popper"),
+            ", introduction to second edition of ",
+            elt("em", "The open society and its enemies"),
+            ", 1950"));
+</script>
+<p>any text</p>
+<p data-classified="secret">The launch code is 00000000.</p>
+<p data-classified="not_secret">This p-element with attribute secret created by me</p>
+<script>
+    let paras = document.body.getElementsByTagName("p");
+    for (let para of Array.from(paras)) {
+        if (para.getAttribute("data-classified") == "secret") { //setAttribute
+            para.remove();  //ничего не покажет, т.к стирает элемент
+        }
+    }
+</script>
+
+<p style="border: 5px solid red">Разметка</p>
+<script>
+    let para = document.body.getElementsByTagName("p")[3];
+    console.log("clientHeight: ", para.clientHeight);   //размер пространства внутри элемента
+    console.log("clientHeight: ", para.offsetHeight);   //пространство занимаемое элементом
+</script>
+
+<a href="http://www.satriani.com">Joe Satriani</a><br>
+<a href="http://www.satriani.com" style="color:green; border: none">Joe Satriani</a><br>
+<strong style="display: block">Text in separated block</strong>
+<strong style="display: none">hidden text</strong>
+
+<script>
+    function count(selector) {
+        return document.querySelectorAll(selector).length; //возвращаемый объект не динамический
+    }
+
+    console.log(count("p")); //подсчитает все элементы р
+    console.log(count(".animal")); //класс энимал
+    console.log(count("p .animal")); //классы энимал внутри р
+    console.log(count("p > .animal")); //классы энимал, которые являются прямыми потомками р
+</script>
+
+<p>Позиционирование и анимация</p>
+<p style="text-align: center">
+    <img src="062999_Estonia03.jpg" style="position: relative" id="animpic">
+    <!-- теперь можно перемещать объект
+    static - default
+    top, left - перемещения
+    absolute - удаляет из обычного дерева документа = может перекрываться другими элементами
+    -->
+</p>
+<script>
+    let cat = document.querySelector('#animpic');
+    let angle = Math.PI / 2;
+    function animate(time, lastTime) {
+        if (lastTime != null) {
+            angle += (time-lastTime) * 0.001;
+        }
+        cat.style.loop = (Math.sin(angle)*20)+"px";
+        cat.style.left = (Math.cos(angle)*200)+"px";
+        requestAnimationFrame(newTime=>animate(newTime, time));
+    }
+    requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
