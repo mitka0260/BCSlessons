@@ -115,11 +115,34 @@ Buttons:
         button.innerText = input.value;
         alert(input.value);
     }
+</script>
+<br><br>
+<input id="mituRida" placeholder="mitu rida" type="text">
+<input id="mituTulpa" placeholder="mitu tulpa" type="text">
+<button onclick="korrutusTabel()">Tekitada korrutustabel</button>
+<br>
 
+<table border="1px" id="korrutusTabel">
+</table>
+
+<script>
+    function korrutusTabel() {
+        let a = document.getElementById("mituRida").value;
+        let b = document.getElementById("mituTulpa").value;
+        let tabel = document.getElementById("korrutusTabel");
+
+        for (let i = 1; i <= a; i++) {
+            let uusRida = document.createElement("tr");
+            for (let j = 1; j <= b; j++) {
+                let uusTulp = document.createElement("td");
+                uusTulp.innerText = i * j;
+                uusRida.appendChild(uusTulp);
+            }
+            tabel.appendChild(uusRida);
+
+        }
+    }
 </script>
 
-
 </body>
-
-
 </html>
