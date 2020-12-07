@@ -144,9 +144,47 @@ Buttons:
 
     function clearTable() {
         let tabel = document.getElementById("korrutusTabel");
-        tabel.innerHTML="";
+        tabel.innerHTML = "";
     }
 
+</script>
+
+<br><br>
+<input id="fibNr" placeholder="mitmendat Fibonacci arvu soovite?">
+<button onclick="fibNr()">Press me</button>
+<div id="vastus">Siia tuleb vastus</div>
+<script>
+
+    function fibNr() {
+        let fibIndex = document.getElementById("fibNr").value;
+        let fibArray = [];
+
+        fibArray[0] = 0;
+        fibArray[1] = 1;
+        for (let i = 2; i < fibIndex; i++)
+            fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
+        document.getElementById("vastus").innerText = fibArray[fibIndex - 1];
+
+        /*if (fibIndex == 1)
+                return 0;
+            else if (fibIndex == 2)
+                return 1;
+            else
+                return fibNr(fibIndex-1) + fibNr(fibIndex-2);*/
+    }
+</script>
+<br><br>
+<input id="factIndex" placeholder="millise arvu faktoriaali soovite?">
+<button onclick="fact()">PressMe</button>
+<div id="factVastus">Siia tuleb vastus</div>
+<script>
+    function fact() {
+        let factIndex = document.getElementById("factIndex").value;
+        let vastus = 1;
+        for (let i = 1; i <= factIndex; i++)
+            vastus = vastus * i;
+        document.getElementById("factVastus").innerText = vastus;
+    }
 </script>
 
 </body>
