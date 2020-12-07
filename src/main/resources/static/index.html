@@ -120,10 +120,12 @@ Buttons:
 
 <input id="mituTulpa" placeholder="mitu tulpa?" type="text">
 <input id="mituRida" placeholder="mitu rida?" type="text">
-<button onclick="korrutusTabel()">Tekitada korrutustabel</button><br>
+<button onclick="korrutusTabel()">Tekitada korrutustabel</button>
+<button onclick="clearTable()">Clear table</button>
 <table border="1px" id="korrutusTabel"></table>
 
 <script>
+
     function korrutusTabel() {
         let a = document.getElementById("mituRida").value;
         let b = document.getElementById("mituTulpa").value;
@@ -138,6 +140,11 @@ Buttons:
             }
             tabel.appendChild(uusRida);
         }
+    }
+
+    function clearTable() {
+        let tabel = document.getElementById("korrutusTabel");
+        tabel.innerHTML="";
     }
 
 </script>
