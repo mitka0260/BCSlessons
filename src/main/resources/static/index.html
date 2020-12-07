@@ -117,13 +117,11 @@ Buttons:
     }
 </script>
 <br><br>
-<input id="mituRida" placeholder="mitu rida" type="text">
-<input id="mituTulpa" placeholder="mitu tulpa" type="text">
-<button onclick="korrutusTabel()">Tekitada korrutustabel</button>
-<br>
 
-<table border="1px" id="korrutusTabel">
-</table>
+<input id="mituTulpa" placeholder="mitu tulpa?" type="text">
+<input id="mituRida" placeholder="mitu rida?" type="text">
+<button onclick="korrutusTabel()">Tekitada korrutustabel</button><br>
+<table border="1px" id="korrutusTabel"></table>
 
 <script>
     function korrutusTabel() {
@@ -139,9 +137,9 @@ Buttons:
                 uusRida.appendChild(uusTulp);
             }
             tabel.appendChild(uusRida);
-
         }
     }
+
 </script>
 
 </body>
