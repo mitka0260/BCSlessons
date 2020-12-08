@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //ARRAYS
+    let listOfNumbers = [2, 3, 5, 7, 11];
+    console.log("First lement of array: " + listOfNumbers[0]);
+    console.log("Length of array: " + listOfNumbers.length);  //или можно array["length"]
+    listOfNumbers.push(20); //add to the end of array
+    console.log("array after pushing 20: " + listOfNumbers);
+    console.log("Pop=delete the last element and return it: " + listOfNumbers.pop());   //delete from the end of massive and RETURN it
+    console.log("Array after pop=deleting last element " + listOfNumbers);         //стековый принцип
+    listOfNumbers.unshift(1); //добавить элемент в начало
+    listOfNumbers.shift(); //убрать элемент из начала массива
+    listOfNumbers.indexOf(11); //выведет индекс элемента 11
+    listOfNumbers.lastIndexOf(11); //выведет индекс элемента 11 но поиск начинает С КОНЦА
+    listOfNumbers.slice(2, 6); //с какого по какой индекс будет искать (будет искать со 2 до 6-1, вернёт МАССИВ
+    //concat - с клеивает массивы
+    //remove(array, index) удаляет элемент из массива
+    //value.color - такое обращение идёт когда я ТОЧНО знаю что именно так называется свойство color
+    //value[2] - когда надо что-то вычислить перед обращению к свойству
+
+    let doh = "hello";
+    console.log("Type of Hello is: " + typeof doh);    //string
+    console.log("Type of Hello after UpperCasing(): " + typeof doh.toUpperCase());  //string
+    console.log("Type of Hello after UpperCasing: " + typeof doh.toUpperCase);    //function
+    console.log("After UpperCasing: " + doh.toUpperCase()); //HELLO
+
+    //OBJECT
+    let day1 = {
+        squirrel: false,
+        events: ["work", "pushing a tree", "eat pizza", "running"]
+    };
+    console.log(day1);
+    //свойства разделены запятыми
+    //после имени свойства стоят : дальше значения этих свойств
+    let descriptions = {
+        work: "Go to work",
+        "pushing a tree": "I pushed a tree with my hands"
+    };
+
+    let {name} = {name: "John", age: 35};
+    console.log(name);
+    let {age} = {name: "John", age: 35};
+    console.log(age);
+
+    //String
+    console.log("anywords".slice(3, 6)); //отрезать часть слова
+    console.log("anywords".indexOf("wds")); //может искать более одного символа!!!
+    console.log("     words \n        ".trim()); //удалит пробелы символы переводы строки-табуляции и др из начала и конца строки
+    console.log(String(6).padStart(3, "0"));    //006 - добавит к 6 столько нулей, чтобы получилось 3значное число
+
+    let string = "sjnsd jsdj sdjnms";
+    let words = string.split(" "); //разделит строку по " ", вернёт массив
+    words.join(". "); //вернёт массив со словами с точкой между ними
+    "word".repeat(3); //повтрит строку 3 раза
+    console.log(string[5]); //доступ к отдельным символам
+    console.log(string.length);
+
+    //функция может принимать любое кол-во аргументов
+    function max(...numbers) { //остаточный параметр
+        let result = -Infinity;
+        for (let number of numbers) {
+            if (number > result)
+                result = number;
+        }
+        return result;
+    }
+
+    console.log("Max value: " + max(4, 1, 9, -89));
+    let numbers1 = [1, 2, 3, 4, 5];
+    console.log("Max value is: " + max(9, ...numbers1, 98)); //можно передавать и другие аргументы, не только ...массив
+
+    //Math object
+
+    function randomPointOnCircle(radius) {
+        let angle = Math.random() * 2 * Math.PI;
+        return {
+            x: radius * Math.cos(angle),
+            y: radius * Math.sin(angle)
+        };
+    }
+
+    console.log("Random point on circle ");
+    console.log(randomPointOnCircle(4));
+
+    //Напишите функцию range, которая принимает два аргумента, start и end,
+    //и возвращает массив, содержащий все числа от start до end включительно.
+    function range(start, end, step = 1) {
+        let listOfNumbers1 = [];
+
+        if (step > 0) {
+            for (let i = start; i <= end; i += step)
+                listOfNumbers1.push(i);
+        } else {
+            for (let i = start; i >= end; i += step)
+                listOfNumbers1.push(i);
+        }
+        return listOfNumbers1;
+    }
+
+    console.log(range(1, 10));
+    console.log(range(5, 1, -1));
+
+    //напишите функцию sum, которая принимает массив чисел и возвращает их сумму.
+    // Запустите пример программы и посмотрите, действительно ли она возвращает 55
+    function sum(arrayToSum) {
+        let sum = 0;
+        for (let i = 0; i < arrayToSum.length; i++) {
+            sum += arrayToSum[i];
+        }
+        return sum;
+    }
+
+    console.log("The sum of elements of this array is: " + sum(range(1, 10)));
+
+    //Напишите функцию reverseArray, которая принимает массив в качестве аргумента и создает новый массив,
+    //содержащий те же элементы в обратном порядке.
+    function reverseArray(arrayToReverse) {
+        let newArray = [];
+        for (let i = 0; i < arrayToReverse.length; i++) {
+            newArray[i] = arrayToReverse[arrayToReverse.length - 1 - i];
+        }
+        return newArray;
+    }
+
+    console.log("Reversed new array: " + reverseArray(range(1, 10)));
+
+    //Напишите функцию reverseArrayInPlace, которая делает то же, что и метод reverse:
+    //преобразовывает массив, заданный в качестве аргумента, меняя порядок следования его элементов
+    //на обратный. Не используйте для этого стандартный метод reverse.
+    function reverseArrayInPlace(arrayToReverse) {
+        let temp;
+        for (let i = 0; i < arrayToReverse.length / 2; i++) {
+            temp = arrayToReverse[i];
+            arrayToReverse[i] = arrayToReverse[arrayToReverse.length - 1 - i];
+            arrayToReverse[arrayToReverse.length - 1 - i] = temp;
+        }
+        return arrayToReverse;
+    }
+
+    console.log("Reversed new array without creating new array: " + reverseArrayInPlace(range(1, 10)));
+
+    //упражнение на списки - list - НЕ СДЕЛАЛ
+
+    //упражнение на глубокое сравнение COMPARISON === не сделал
+
+    //генерация случайного числа от 0 до 9
+    console.log("Random number from 0 to 9: " + Math.floor(Math.random() * 10));
+    Math.floor(2, 5); //округление до целого в меньшую сторону
+    Math.ceil(2, 5); //округление до целого в большшую сторону
+    Math.round(2, 5); //округление до ближайшего целого
+    Math.abs(-7);
+
+    //JSON - JavaScript Object Notation
+    //массивы и объекты содержат ссылку на их содержание в памяти. JSON - это формат перевода содержимого объекта
+    //на понятный язык
+    console.log(JSON.stringify(day1)); //возврат объекета в формате JSON
+    console.log(JSON.parse( //парсер
+        JSON.stringify(day1)    //метод parse принимает в аргументе формат JSON
+    ).events);
+
+    //Функции высшего порядка - Функции, которые работают с другими функциями, либо принимая их
+    //в качестве аргументов, либо возвращая их
+    //абстракция - нужное действие вынести в отдельную функцию
+    //console.log(range(1, 10));
+
+    const power = function(base, exponent) {
+        let result = 1;
+        for (let count = 0; count < exponent; count++)
+            result *= base;
+        return result;
+    };
+    console.log(power(2,5));
+
+    const power1 = (base, exponent) => {
+        let result = 1;
+        for (let count = 0; count < exponent; count++)
+            result *= base;
+        return result;
+    }
+    console.log(power1(2,5));
+
+    const square1 = (x) => { return x*x; }
+    const square2 = x   => x*x;
+    console.log(square1(9));
+    console.log(square2(9));
+
+    function greaterThan(n) {
+        return m => m > n;
+    }
+    let greaterThan10 = greaterThan(10);
+    console.log(greaterThan10(11));
+    console.log(greaterThan10(9));
+
+    //КОРОЧЕ ЕСТЬ ФУНКЦИИ ВЫСШЕГ ОПОРЯДКА, map, reduce и пр.
+
+
+</script>
+
+</body>
+</html>

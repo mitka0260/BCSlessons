@@ -147,6 +147,7 @@ nextSibling - следующий узел (того же родителя)
     //insertBefore(nodeToInsert, elementBeforeWhichInsert);
     //replaceChild(newNode, nodeForChange);
     document.body.insertBefore(links[1], links[1]); //удалит ссылку1 и вставит её перед ссылкой0
+    document.body.replaceChild(links[1], links[0]);    //новый, заменяемый
     links = document.body.getElementsByTagName("a");
     console.log(links);
     //можно преобразовать коллекцию в массив:
@@ -237,7 +238,7 @@ nextSibling - следующий узел (того же родителя)
 
 <p>Позиционирование и анимация</p>
 <p style="text-align: center">
-    <img src="062999_Estonia03.jpg" style="position: relative" id="animpic">
+    <img id="animpic" src="062999_Estonia03.jpg" style="position: relative">
     <!-- теперь можно перемещать объект
     static - default
     top, left - перемещения
@@ -247,15 +248,114 @@ nextSibling - следующий узел (того же родителя)
 <script>
     let cat = document.querySelector('#animpic');
     let angle = Math.PI / 2;
+
     function animate(time, lastTime) {
         if (lastTime != null) {
-            angle += (time-lastTime) * 0.001;
+            angle += (time - lastTime) * 0.001;
         }
-        cat.style.loop = (Math.sin(angle)*20)+"px";
-        cat.style.left = (Math.cos(angle)*200)+"px";
-        requestAnimationFrame(newTime=>animate(newTime, time));
+        cat.style.loop = (Math.sin(angle) * 20) + "px";
+        cat.style.left = (Math.cos(angle) * 200) + "px";
+        requestAnimationFrame(newTime => animate(newTime, time));
     }
+
     requestAnimationFrame(animate);
+</script>
+
+<!--
+обработка событий
+система сама оповещает нас, что произошло событие
+-->
+<p>Press here to activate event handler</p>
+<button id="btn">Press me</button>
+<script>
+    window.addEventListener("click", () => {
+        console.log("Who is here?");    //для щелчка по любому месту окна
+    });
+    let button = document.getElementById("btn");      //querySelector("button");
+    button.addEventListener("click", () => {
+        console.log("Button was pressed");
+    });
+</script>
+<br>
+<button id="mouseBtn">Click mouse button here</button>
+<script>
+    let mouseBtn = document.getElementById("mouseBtn");
+    mouseBtn.addEventListener("mousedown", event => {   //есть обработчик для целого окна, но этот будет выполняться первым
+        if (event.button == 0)
+            console.log("Left button");
+        else if (event.button == 1) {
+            console.log("Middle button");
+            event.preventDefault();
+        } else if (event.button == 2) {
+            event.preventDefault(); //должен запретить открытие контекстного меню, которое дефолтовое для правой кнопки мыши
+            console.log("right button");
+            event.stopPropagation();    //при нажатии правой конпоки мыши это событие больше никто не услышит
+        }
+    });
+</script>
+<br>
+<p>If you press V background will become another violet</p>
+<script>
+    window.addEventListener("keydown", event => {
+        if (event.key == "v")
+            document.body.style.background = "violet";
+    });
+    window.addEventListener("keyup", event => {
+        if (event.key == "v")
+            document.body.style.background = "";
+    });
+    /*
+    есть и для сочетаний клавишь shiftKey, ctrlKey, altKey, metaKey
+     */
+</script>
+
+<!-- РИСОВАНИЕ ТОЧЕК НА ЭКРАНЕ -->
+<style>
+    body {
+        height > 200px;
+        background: beige;
+    }
+
+    .dot {
+        height: 8px;
+        width: 8px;
+        border-radius: 4px;
+        background: blue;
+        position: absolute;
+    }
+</style>
+<script>
+    window.addEventListener("click", event => {
+        let dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.left = (event.pageX - 4) + "px";  //pageX - относительно ВСЕЙ страницы
+        dot.style.top = (event.pageY - 4) + "px";
+        document.body.appendChild(dot);
+    });
+</script>
+<p>перетащите полоску, чтобы изменить её ширину</p>
+<div style="background: orange; width: 60px; height: 20px"></div>
+<script>
+    let lastX; //отслеживает Х-координату мыши
+    let bar = document.querySelector("div");
+    bar.addEventListener("mousedown", event => {
+        if (event.button == 0) {
+            lastX = event.clientX;
+            window.addEventListener("mousemove", moved);
+            event.preventDefault();
+        }
+    });
+
+    function moved(event) {
+        if (event.buttons == 0) {   //buttonS - свойство содержит данные о нажатых кнопках мыши
+            window.removeEventListener("mousemove", moved); //для всего окна, чтобы во время передвиждения мыши при нажатой клаивши её можно было вытаскивать за пределы полоски
+        } else {
+            let dist = event.clientX - lastX;
+            let newWidth = Math.max(10, bar.offsetWidth + dist);
+            bar.style.width = newWidth + "px";
+            lastX = event.clientX;
+        }
+    }
 </script>
 
 </body>
