@@ -7,6 +7,8 @@
 <body>
 <script>
     alert("First JavaScript!!!");
+
+
 </script>
 <h1><b><i>
     First step to become a kick-ass web-developer is done
@@ -115,6 +117,8 @@ Buttons:
         button.innerText = input.value;
         alert(input.value);
     }
+
+
 </script>
 <br><br>
 
@@ -125,7 +129,6 @@ Buttons:
 <table border="1px" id="korrutusTabel"></table>
 
 <script>
-
     function korrutusTabel() {
         let a = document.getElementById("mituRida").value;
         let b = document.getElementById("mituTulpa").value;
@@ -147,14 +150,18 @@ Buttons:
         tabel.innerHTML = "";
     }
 
+
 </script>
+<br>
+Fibonacci<br>
+1 2 3 4 5 6 7 8<br>
+0 1 1 2 3 5 8 13
 
 <br><br>
 <input id="fibNr" placeholder="mitmendat Fibonacci arvu soovite?">
 <button onclick="fibNr()">Press me</button>
 <div id="vastus">Siia tuleb vastus</div>
 <script>
-
     function fibNr() {
         let fibIndex = document.getElementById("fibNr").value;
         let fibArray = [];
@@ -164,16 +171,42 @@ Buttons:
         for (let i = 2; i < fibIndex; i++)
             fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
         document.getElementById("vastus").innerText = fibArray[fibIndex - 1];
-
-        /*if (fibIndex == 1)
-                return 0;
-            else if (fibIndex == 2)
-                return 1;
-            else
-                return fibNr(fibIndex-1) + fibNr(fibIndex-2);*/
     }
+
+
 </script>
 <br><br>
+<input id="fibNrRec" placeholder="Fibonacci rekursiivselt">
+<button onclick="fibNrRec()">Press Me</button>
+<div id="vastusFibRec">Siia tuleb vastus</div>
+<script>
+    function fibNrRec() {
+        let fibIndexRec = document.getElementById("fibNrRec").value;
+        document.getElementById("vastusFibRec").innerText = fibRecCalc(fibIndexRec);
+    }
+
+    function fibRecCalc(fibIndexRec) {
+        if (fibIndexRec == 1)
+            return 0;
+        else if (fibIndexRec == 2)
+            return 1;
+        else
+            return fibRecCalc(fibIndexRec - 1) + fibRecCalc(fibIndexRec - 2);
+    }
+
+
+    /*
+    let button = document.getElementById("pressMe");
+    let input = document.getElementById("sisestus");
+    button.onclick = function () {
+        button.innerText = input.value;
+        alert(input.value);
+    }
+     */
+
+</script>
+
+
 <input id="factIndex" placeholder="millise arvu faktoriaali soovite?">
 <button onclick="fact()">PressMe</button>
 <div id="factVastus">Siia tuleb vastus</div>
@@ -186,6 +219,27 @@ Buttons:
         document.getElementById("factVastus").innerText = vastus;
     }
 </script>
+
+<input id="factIndexRec" placeholder="faktoriaal rekursiivselt">
+<button onclick="factRec()">Press Me</button>
+<div id="factRecVastus">Siia tuleb vastus</div>
+<script>
+    function factRec() {
+        let factIndexRec = document.getElementById("factIndexRec").value;
+        document.getElementById("factRecVastus").innerText = factRecCalc(factIndexRec);
+    }
+    function factRecCalc(factIndexRec) {
+        if (factIndexRec <= 0)
+            return 1;
+        else
+            return factIndexRec*factRecCalc(factIndexRec-1);
+    }
+
+</script>
+
+
+
+
 
 </body>
 </html>

@@ -1,4 +1,5 @@
-package ee.bcs.java.demo.tasks;/*
+package ee.bcs.java.demo.tasks;
+/*
 Implementatsioonid для SET:
 HashSet
 TreeSet
