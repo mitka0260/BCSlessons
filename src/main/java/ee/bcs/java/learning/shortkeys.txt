@@ -1,0 +1,111 @@
+Аббревиатуры:
+ctrl+j - все сочетания клавиш
+
+psvm - TAB - public static void main
+s/sout - TAB - system.out.println
+se/serr - TAB - System.err.println - внутри кавычек можно нажать enter
+I - tab - foreach - for (Object o :) {}
+iter - tab - for (String arg : args) {}
+fori - tab - for (int i = 0; i < ; i++) {}
+
+Редактирование/написание кода:
+
+alt+enter
+ctrl+shift+enter - прыгнуть на новую строчку
+
+ctrl+space - autocomplite
+ctrl+shift+space - умный автокомплит
+ИХ МОЖНО НАЖИМАТЬ ВТОРОЙ РАЗ после того как идея мне отказала
+
+ctrl+shift+enter - autocomplite
+
+ctrl+w - поэлементное выделение
+ctrl+shift+w - поэлементно убрать выделение
+ctrl+y - удалить строку
+ctrl+x - вырезать строку (выделять не надо)
+ctrl+d - копировать строку или блока (надо его выделить целиком)
+ctrl+~ - изменить стиль копирования блока (чтобы { ставил на одной строке с объявлением метода)
+
+ctrl + -/+ - свернуть/развернуть блок
+ctrl+shift+- - свернуть все блоки
+
+ctrl+alt+o - удалить ненужные импорты
+
+ctrl + [ - перейти в начало метода
+ctrl + ] - перейти в конец метода
++shift - можно выделить 
+
+навести курсор мыши на полосу прокрутки справа - покажет код, который я не вижу
+
+ctrl+g - перейти к нужной строке по её номеру
+
+ctrl+backspace - удалить целое слово
+ctrl+delete - удалить целое слово
+
+alt+insert - generate something
+
+отступы:
+tab
+shift+tab
+ctrl+alt+i 
+
+ctrl+alt+L
+ctrl+shift+alt+L - dialog
+
+ctrl+shift+alt+t - refactor
+
+ctrl+alt+t - surround - окружить строку циклом или ч-л другим (исключениями)
+
+F2 - прыгать по ошибкам / серым местам
+
+ctrl+/ - добавить коммент, можно целыми блоками закомментить
+ctrl+shift+/ - добавить /* */
+
+alt+1
+alt+0
+esc - вернуться в редактор
+другие цифры
+
+ctrl +b - go to declaration
+ctrl+alt+b - go to implementation
+alt+f7 - показать все места, где используется данный интерсфейс
+
+ctrl+ctrl - run anything
+
+ctrl+tab - бегать между вкладками
+
+ctrl+n - поиск по классам чтобы перейти в к-л
+		в поиске можно ввести Hell:13 и перейти к этой строке класса
+dblclick shift-shift - поиск по всему
+ctrl+shift+n - поиск по файлам
+ctrl+alt+shift+N - поиск символа
+alt+home - navigation bar
+shift+ctrl+A - actions
+
+ctrl+f12 - посмотреть все методы
+
+ctrl+f4 - закрыть класс
+
+ctrl+i - переопределить метод (если надо)
+
+shift+f10 - запустить то, что было собрано последним
+shift+alt+f10 - соберёт то, что активно
+shift+f9 - запустить дебаг
+
+gutter - поле для дебага рядом с номерами строк
+ctrl+e - recent files
+ctrl+shift+e - recent locations
+
+советы:
+максимально отключить все табы - освободить пространство
+выключить табы (чтобы при открытии файла не добавлялась таба)
+
+маркеры
+надо именовать
+f11 - поставить маркер без имени
+ctrl+f11 - поставить именованный маркер
+потом ctrl+цифра и можно сразу на него перейти
+shift+f11 - поиск по маркерам
+
+можно сделать свой шорткат
+autoscroll to source
