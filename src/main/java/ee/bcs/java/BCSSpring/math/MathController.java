@@ -2,11 +2,9 @@ package ee.bcs.java.BCSSpring.math;
 
 import ee.bcs.java.lessons.Lesson1;
 import ee.bcs.java.lessons.Lesson3;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 public class MathController {
 
@@ -30,15 +28,17 @@ public class MathController {
     }
 */
 
-/*    @GetMapping(value = "")
+    @CrossOrigin
+    @GetMapping(value = "")
     public String helloSpring(@RequestParam(value = "name", defaultValue = "Spring") String name) {
         return "Hello, " + name;
         //return String.format("Hello %s!", name);
     }
-*/
+
+    @CrossOrigin
     @GetMapping("testing/min")
     public int testing(@RequestParam("a") int a,
-                            @RequestParam("b") int b) {
+                       @RequestParam("b") int b) {
         return Lesson1.min(a, b);
     }
 
@@ -56,6 +56,7 @@ public class MathController {
     }
     //http://localhost:8080/math/isEven/5
 
+    @CrossOrigin
     @GetMapping("math/isEven")
     public String isNumberEvenReq(
             @RequestParam("number") int a) {
@@ -80,6 +81,7 @@ public class MathController {
             return b;
     }
 
+    @CrossOrigin
     @GetMapping("math/max")
     public String maxValueReq(
             @RequestParam("aKey") int a,
@@ -95,8 +97,9 @@ public class MathController {
             @PathVariable("b") int b) {
         return "Min value is " + Lesson1.min(a, b);
     }
-    //http://localhost:8080/math/min/7/2
 
+    //http://localhost:8080/math/min/7/2
+    @CrossOrigin
     @GetMapping("math/min")
     public String minValueReq(
             @RequestParam("aKey") int a,
@@ -112,6 +115,7 @@ public class MathController {
     }
     //http://localhost:8080/math/Fibonacci/7
 
+    @CrossOrigin
     @GetMapping("math/Fibonacci")
     public String fibonacciNrReq(
             @RequestParam("n") int n) {

@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 
 <head>
     <title>First title after 20 years</title>
@@ -155,10 +155,10 @@ Buttons:
 <br>
 Fibonacci<br>
 1 2 3 4 5 6 7 8<br>
-0 1 1 2 3 5 8 13
+0 1 1 2 3 5 8 13<br>
 
-<br><br>
-<input id="fibNr" placeholder="mitmendat Fibonacci arvu soovite?">
+
+<input id="fibNr" placeholder="Fibonacci iteratiivselt">
 <button onclick="fibNr()">Press me</button>
 <div id="vastus">Siia tuleb vastus</div>
 <script>
@@ -172,10 +172,8 @@ Fibonacci<br>
             fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
         document.getElementById("vastus").innerText = fibArray[fibIndex - 1];
     }
-
-
 </script>
-<br><br>
+
 <input id="fibNrRec" placeholder="Fibonacci rekursiivselt">
 <button onclick="fibNrRec()">Press Me</button>
 <div id="vastusFibRec">Siia tuleb vastus</div>
@@ -207,7 +205,7 @@ Fibonacci<br>
 </script>
 
 
-<input id="factIndex" placeholder="millise arvu faktoriaali soovite?">
+<input id="factIndex" placeholder="faktoriaal iteratiivselt">
 <button onclick="fact()">PressMe</button>
 <div id="factVastus">Siia tuleb vastus</div>
 <script>
@@ -228,17 +226,29 @@ Fibonacci<br>
         let factIndexRec = document.getElementById("factIndexRec").value;
         document.getElementById("factRecVastus").innerText = factRecCalc(factIndexRec);
     }
+
     function factRecCalc(factIndexRec) {
         if (factIndexRec <= 0)
             return 1;
         else
-            return factIndexRec*factRecCalc(factIndexRec-1);
+            return factIndexRec * factRecCalc(factIndexRec - 1);
     }
 
 </script>
-
-
-
+<p>
+    päringud javascriptis
+    запросы асинхронны - код работает дальше, не дожидается пока запрос вернётся
+</p>
+<script>
+    fetch('http://192.168.1.67:8101/companies') //в ответе много информации
+        .then(result => result.json())    //пошли промисы, нам надо от всей инфы только json
+        .then(      //полученный джейсон идёт дальше сюда в функцию
+            function (companies) {
+                for (let i = 0; i < companies.length; i++ ) {
+                    console.log(companies[i]);
+                }
+            });
+</script>
 
 
 </body>
