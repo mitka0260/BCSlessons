@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+https://learn.javascript.ru/fetch
+
+«AJAX» (аббревиатура от Asynchronous JavaScript And XML)
+let promise = fetch(url, [options])
+
+let response = await fetch(url);
+
+if (response.ok) { // если HTTP-статус в диапазоне 200-299
+  // получаем тело ответа (см. про этот метод ниже)
+  let json = await response.json();
+} else {
+  alert("Ошибка HTTP: " + response.status);
+}
+
+Во-первых, promise выполняется с объектом встроенного класса Response
+Во-вторых, для получения тела ответа нам нужно использовать дополнительный вызов метода.
+response.text() – читает ответ и возвращает как обычный текст,
+response.json() – декодирует ответ в формате JSON,
+response.formData() – возвращает ответ как объект FormData (разберём его в следующей главе),
+response.blob() – возвращает объект как Blob (бинарные данные с типом),
+response.arrayBuffer() – возвращает ответ как ArrayBuffer (низкоуровневое представление бинарных данных),
+помимо этого, response.body – это объект ReadableStream, с помощью которого можно считывать тело запроса по частям. Мы рассмотрим и такой пример несколько позже.
+
+
+
+-->
+<div id="a1" title="a1">response will come here</div><br>
+<div id="a2" title="a2">response will come here</div><br>
+<script>
+    (async () => {
+        let url = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
+        let response = await fetch(url);
+        let commits = await response.json(); // читаем ответ в формате JSON
+        document.getElementById("a1").innerText = commits[0].author.login;
+        //alert(commits[0].author.login);
+    })()
+    //тоже самое без await
+    fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits')
+        .then(response => response.json())
+        .then(commits => document.getElementById("a2").innerText = commits[0].author.login);  //alert(commits[0].author.login));
+</script>
+<div id="a3" title="a3">response will come here</div><br>
+<script>
+    //читаем ответ
+    (async () => {
+        let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
+        let text = await response.text(); // прочитать тело ответа как текст
+        document.getElementById("a2").innerText = text.slice(0, 80) + '...';
+        //alert(text.slice(0, 80) + '...');
+    })()
+</script>
+<div id="a4" title="a4">response will come here</div><br>
+<script>
+    //В качестве примера работы с бинарными данными, давайте запросим и выведем на экран логотип спецификации «fetch» (см. главу Blob, чтобы узнать про операции с Blob):
+    //https://learn.javascript.ru/blob
+    (async () => {
+        let response = await fetch('https://resources.whatwg.org/logo-fetch.svg');
+
+        let blob = await response.blob(); // скачиваем как Blob-объект
+
+        // создаём <img>
+        let img = document.createElement('img');
+        img.style = 'position:fixed;top:10px;left:10px;width:100px';
+        document.body.append(img);
+
+        // выводим на экран
+        img.src = URL.createObjectURL(blob);
+
+        setTimeout(() => { // прячем через три секунды
+            img.remove();
+            URL.revokeObjectURL(img.src);
+        }, 3000);
+    })()
+</script>
+<div id="a5" title="a5">response will come here</div><br>
+<script>
+    // Заголовки ответа
+    // Заголовки ответа хранятся в похожем на Map объекте response.headers.
+    // Это не совсем Map, но мы можем использовать такие же методы, как с Map, чтобы получить заголовок по его имени или перебрать заголовки в цикле:
+    (async () => {
+        let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
+
+        // получить один заголовок
+
+        document.getElementById("a5").innerText = response.headers.get('Content-Type');
+        //alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
+
+        // перебрать все заголовки
+        for (let [key, value] of response.headers) {
+            document.getElementById("a5").innerText = `${key} = ${value}`;
+            //alert(`${key} = ${value}`);
+        }
+    })()
+</script>
+<script>
+    async function getUsers(names) {
+        let jobs = [];
+
+        for(let name of names) {
+            let job = fetch(`https://api.github.com/users/${name}`).then(
+                successResponse => {
+                    if (successResponse.status != 200) {
+                        return null;
+                    } else {
+                        return successResponse.json();
+                    }
+                },
+                failResponse => {
+                    return null;
+                }
+            );
+            jobs.push(job);
+        }
+
+        let results = await Promise.all(jobs);
+
+        return results;
+    }
+</script>
+
+</body>
+</html>
