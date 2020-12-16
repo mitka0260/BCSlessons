@@ -6,20 +6,31 @@
 </head>
 <body>
 <div>
-    <form>
-        <h2>Registration</h2>
-        <div>
-            <input type="text" path="username" placeholder="Username" autofocus="true">
-        </div>
-        <div>
-            <input type="password" path="password" placeholder="Password">
-        </div>
-        <div>
-            <input type="password" path="passwordConfirm" placeholder="Confirm your password">
-        </div>
-        <button type="submit">Register</button>
-    </form>
+    <h2>Registration</h2>
+    <tabel>
+        <tr>
+            <td><input id="username" placeholder="username" autofocus="true"></td>
+            <td><input id="password" placeholder="password" type="password"></td>
+            <td>
+                <button id="regBtn">Register</button>
+            </td>
+        </tr>
+    </tabel>
+    <br></br>
     <a href="/">Main</a>
 </div>
+
+<script>
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let regBtn = document.getElementById("regBtn");
+        regBtn.onclick = function () {
+            console.log(username.value);
+            console.log(password.value);
+        fetch('http://localhost:8080/registration?username=' + username.value + '&password=' + password.value);
+            //.then(result => result.text());
+    }
+</script>
+
 </body>
 </html>
