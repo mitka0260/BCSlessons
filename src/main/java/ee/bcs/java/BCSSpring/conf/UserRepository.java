@@ -1,0 +1,31 @@
+package ee.bcs.java.BCSSpring.conf;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Repository
+public class UserRepository {
+
+    @Autowired
+    private NamedParameterJdbcTemplate jdbcTemplate;
+
+    public String getUserPassword (String username) {
+        String sql = "SELECT password FROM users WHERE username = :username";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("username", username);
+        return jdbcTemplate.queryForObject(sql, paramMap,  String.class);
+    }
+
+    public void registerUser(String username, String password) {
+        String sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+        Map paramMap = new HashMap<>();
+        paramMap.put("username", username);
+        paramMap.put("password", password);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+}

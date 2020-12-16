@@ -14,14 +14,17 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    //в базе данных должен быть хеш-код (от сайта bcrypt). Если так, то encoder использовать не надо
 
     @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return User.withUsername("test")
-                .password(passwordEncoder.encode("test"))
-                .roles("USER").build();
+        return User
+                .withUsername(username)
+                .password(passwordEncoder.encode(userRepository.getUserPassword(username)))
+                .roles("USER")
+                .build();
     }
 }
