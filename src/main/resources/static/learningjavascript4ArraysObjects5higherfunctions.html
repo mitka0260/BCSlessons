@@ -161,8 +161,8 @@
     //JSON - JavaScript Object Notation
     //массивы и объекты содержат ссылку на их содержание в памяти. JSON - это формат перевода содержимого объекта
     //на понятный язык
-    console.log(JSON.stringify(day1)); //возврат объекета в формате JSON
-    console.log(JSON.parse( //парсер
+    console.log("JSON format: " + JSON.stringify(day1)); //возврат объекета в формате JSON
+    console.log("Parsed json: " + JSON.parse( //парсер
         JSON.stringify(day1)    //метод parse принимает в аргументе формат JSON
     ).events);
 

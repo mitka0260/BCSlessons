@@ -23,7 +23,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return User
                 .withUsername(username)
-                .password(passwordEncoder.encode(userRepository.getUserPassword(username)))
+                .password(userRepository.getUserPassword(username))
+                //.password(passwordEncoder.encode(userRepository.getUserPassword(username)))
                 .roles("USER")
                 .build();
     }

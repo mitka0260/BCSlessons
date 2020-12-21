@@ -14,17 +14,17 @@ public class UserRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public String getUserPassword (String username) {
-        String sql = "SELECT password FROM users WHERE username = :username";
+        String sql = "SELECT encodedPassword FROM users WHERE username = :username";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("username", username);
         return jdbcTemplate.queryForObject(sql, paramMap,  String.class);
     }
 
-    public void registerUser(String username, String password) {
-        String sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+    public void registerUser(String username, String encodedPassword) {
+        String sql = "INSERT INTO users (username, encodedpassword) VALUES (:username, :password)";
         Map paramMap = new HashMap<>();
         paramMap.put("username", username);
-        paramMap.put("password", password);
+        paramMap.put("password", encodedPassword);
         jdbcTemplate.update(sql, paramMap);
     }
 
