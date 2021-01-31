@@ -2,12 +2,14 @@ package ee.bcs.java.lessons;
 
 /*
     Loo klass mis implementeerib java.util.List-i
+
     Implementeeri meetodid:
         add(Object a);
         contains(Object o);
         size();
         remove(Object o);
-     */
+
+*/
 
 import java.util.ArrayList;
 import java.util.List;

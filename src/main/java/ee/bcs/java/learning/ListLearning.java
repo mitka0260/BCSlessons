@@ -1,4 +1,4 @@
-package ee.bcs.java.demo.tasks;/*
+package ee.bcs.java.learning;/*
 ArrayList - списочный массив
 размер можно менять
 Внутри каждого объекта типа ArrayList хранится обычный массив элементов

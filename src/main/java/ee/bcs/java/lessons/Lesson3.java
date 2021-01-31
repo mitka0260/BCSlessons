@@ -14,7 +14,7 @@ public class Lesson3 {
         //for int type max = 47
         //for long type max = ??? (too much time to wait)
 
-        System.out.println("Fibonacci rekursiivselt massiiviga = " + fibonacci3(95));
+        System.out.println("Fibonacci rekursiivselt massiiviga<=>memoization = " + fibonacci3(95));
         //for int type m = 47
         //for long type max = 95
 
@@ -42,8 +42,8 @@ public class Lesson3 {
         for (int i = 2; i < fib.length; i++) {
             fib[i] = fib[i - 1] + fib[i - 2];
         }
-        //for (int i = 0; i < nr; i++)
-        //System.out.print(fib[i] + " ");
+        // for (int i = 0; i < nr; i++)
+        // System.out.print(fib[i] + " ");
         System.out.println();
         return fib[nr - 1];
     }

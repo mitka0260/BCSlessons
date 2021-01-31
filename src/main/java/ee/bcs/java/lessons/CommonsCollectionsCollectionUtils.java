@@ -1,67 +1,109 @@
-//package ee.bcs.java.lessons;
-//
-////import org.apache.commons.collections4.CollectionUtils;
-//
-//import java.util.Arrays;
-//import java.util.LinkedList;
-//import java.util.List;
-//
-//public class CommonsCollectionsCollectionUtils {
-//
-//    public static void main(String[] args) {
-//
-//        Customer customer1 = new Customer(1, "Daniel");
-//        Customer customer2 = new Customer(2, "Fredrik");
-//        Customer customer3 = new Customer(3, "Kyle");
-//        Customer customer4 = new Customer(4, "Bob");
-//        Customer customer5 = new Customer(5, "Cat");
-//        Customer customer6 = new Customer(6, "John");
-//
-//        System.out.println(customer1); //1 Daniel, toString is overridden
-//
-//        List<Customer> list1 = Arrays.asList(customer1, customer2, customer3);
-//        List<Customer> list2 = Arrays.asList(customer4, customer5, customer6);
-//        List<Customer> list3 = Arrays.asList(customer1, customer2);
-//
-//        List<Customer> linkedList1 = new LinkedList<>(list1);
-//        System.out.println(linkedList1);
-//
-//        //добавление только ненулевых элементов
-//        System.out.println("list1: " + list1); //[1 Daniel, 2 Fredrik, 3 Kyle]
-//        CollectionUtils.addIgnoreNull(list1, customer4);
-//        System.out.println("list1: " + list1); //[1 Daniel, 2 Fredrik, 3 Kyle]
-//    }
-//
-//}
-//
-//class Customer {
-//    private int id;
-//    private String name;
-//
-//    Customer(Integer id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
-//
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return this.getId() + " " + this.getName();
-//    }
-//
-//}
+package ee.bcs.java.lessons;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.Transformer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+public class CommonsCollectionsCollectionUtils {
+
+    public static void main(String[] args) {
+
+        List<String> list = new LinkedList<String>();
+
+        CollectionUtils.addIgnoreNull(list, null);
+        CollectionUtils.addIgnoreNull(list, "a");
+
+        System.out.println(list);
+
+        if (list.contains(null)) {
+            System.out.println("collection contains null");
+        } else {
+            System.out.println("collection does not contain null");
+        }
+
+        // ============================
+
+        List<String> sortedList1 = Arrays.asList("A", "C", "E");
+        List<String> sortedList2 = Arrays.asList("B", "D", "F");
+
+        //объединение двух уже отсортированных списков
+        List<String> mergedList = CollectionUtils.collate(sortedList1, sortedList2);
+        System.out.println(mergedList);
+
+        // =============================
+
+        //преобразуем список строк в список целых чисел
+        List<String> stringList = Arrays.asList("1", "2", "3");
+        List<Integer> integerList = (List<Integer>) CollectionUtils.collect(stringList, new Transformer<String, Integer>() {
+            @Override
+            public Integer transform(String input) {
+                return Integer.parseInt(input);
+            }
+        });
+        System.out.println(integerList);
+
+        // =============================
+
+        List<Integer> integerList1 = new ArrayList<>();
+        integerList1.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+        System.out.println("Original list: " + integerList1);
+
+        CollectionUtils.filter(integerList1, new Predicate<Integer>() {
+            @Override
+            public boolean evaluate(Integer input) {
+
+                if (input.intValue() % 2 == 0)
+                    return true;
+                else
+                    return false;
+            }
+        });
+        System.out.println("Filtered list: " + integerList1);
+
+        // =============================
+
+        //отфильтруем список целых чисел, чтобы получить только нечетные числа
+        List<Integer> integerList2 = new ArrayList<>();
+        integerList2.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        System.out.println("Original list: " + integerList2);
+
+        CollectionUtils.filterInverse(integerList2, new Predicate<Integer>() {
+            @Override
+            public boolean evaluate(Integer input) {
+                if (input.intValue() % 2 == 0) {
+                    return true;
+                } else {
+                }
+                return false;
+            }
+        });
+        System.out.println("Filtered list: " + integerList2);
+
+        // =============================
+
+        //проверки, содержит ли коллекция данную коллекцию или нет
+        List<String> list1 = Arrays.asList("A", "A", "A", "C", "B", "B");
+        List<String> list2 = Arrays.asList("A", "A", "B", "B");
+        System.out.println("List1: " + list1);
+        System.out.println("List2: " + list2);
+        System.out.println("Is list 2 contained on list1: " + CollectionUtils.isSubCollection(list2, list1));
+
+        // =============================
+        // получения общих объектов между двумя коллекциями (пересечение).
+        System.out.println("Commons objects of list1 and lis2: " + CollectionUtils.intersection(list1, list2));
+
+        // =============================
+        // получения новой коллекции путем вычитания объектов одной коллекции из другой
+        System.out.println("list1 - list2: " + CollectionUtils.subtract(list1, list2));
+
+        // =============================
+        // объединение двух коллекций
+        System.out.println("Union of list1 and list2: " + CollectionUtils.union(list1, list2));
+    }
+
+}

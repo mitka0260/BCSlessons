@@ -40,7 +40,7 @@ public class MyList implements List {
                 }
             }
         }
-        index = index- temp;
+        index = index - temp;
         return true;
     }
 
