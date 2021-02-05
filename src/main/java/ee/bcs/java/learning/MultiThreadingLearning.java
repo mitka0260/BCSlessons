@@ -5,8 +5,6 @@ package ee.bcs.java.learning;
 Цель - не скорость, а реализация к-л функционала. (чтобы клиент не ждал, ... )
 */
 
-import liquibase.pro.packaged.M;
-
 public class MultiThreadingLearning {
     public static void main(String[] args) throws InterruptedException {    // это дефолтовый поток main
 
